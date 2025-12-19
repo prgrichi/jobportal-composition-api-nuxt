@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
+    authReady: false,
   }),
 
   getters: {
@@ -10,8 +13,13 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
-    setUser(user) {
-      this.user = user;
+    init() {
+      if (this.authReady) return;
+
+      onAuthStateChanged(auth, (user) => {
+        this.user = user;
+        this.authReady = true;
+      });
     }
   },
 });

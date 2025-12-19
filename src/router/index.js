@@ -56,14 +56,26 @@ const router = createRouter({
   ]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  if (to.meta.requiresAuth && !authStore.user) {
-    next({ name: 'login' });
+  // warten bis Firebase weiß, ob User existiert
+  if (!authStore.authReady) {
+    await new Promise(resolve => {
+      const unwatch = authStore.$subscribe(() => {
+        if (authStore.authReady) {
+          unwatch();
+          resolve();
+        }
+      });
+    });
+  }
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next("/login");
   } else {
     next();
   }
-})
+});
 
 export default router;
