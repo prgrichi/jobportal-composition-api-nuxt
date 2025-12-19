@@ -28,9 +28,9 @@ export default {
           600: "#F43F5E",
         },
         surface: "#F6F7FF",
-        
-        
-        
+
+
+
       },
 
       maxWidth: {
