@@ -15,17 +15,17 @@
         </RouterLink>
       </div>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <template v-if="isLoading">
+        <template v-if="jobStore.isLoading">
           <JobSkeleton v-for="n in 3" :key="`sk-${n}`" />
         </template>
 
         <template v-else>
-          <JobSingle v-for="job in jobs" :key="job.id" :job="job" />
+          <JobSingle v-for="job in jobStore.jobs" :key="job.id" :job="job" />
         </template>
 
-        <template v-if="error">
+        <template v-if="jobStore.error">
           <div class="col-span-full text-center text-red-500">
-            {{ error }}
+            {{ jobStore.error }}
           </div>
         </template>
       </div>
@@ -45,7 +45,8 @@
 </template>
 
 <script>
-import jobsMixin from '@/mixins/jobsMixin';
+// import jobsMixin from '@/mixins/jobsMixin';
+import { useJobStore } from '@/stores/jobs/jobs';
 import JobSingle from '@/components/jobs/JobSingle.vue';
 import JobSkeleton from "@/components/jobs/JobSkeleton.vue";
 
@@ -55,10 +56,13 @@ export default {
     JobSingle,
     JobSkeleton
   },
-  // job in mixins:
-  mixins: [jobsMixin],
+  computed: {
+    jobStore() {
+      return useJobStore();
+    }
+  },
   created() {
-    this.fetchJobs({
+    this.jobStore.fetchJobs({
       orderBy: { field: 'createdAt', direction: 'desc' },
       limit: 3
     });

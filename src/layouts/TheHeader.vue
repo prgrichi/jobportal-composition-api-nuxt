@@ -34,7 +34,7 @@
 
 <script>
 import { signOut } from 'firebase/auth';
-import { auth } from '@/firebase';
+import { auth } from '@/config/firebase';
 import { useToastStore } from '@/stores/toast/toast';
 import { useAuthStore } from '@/stores/auth/auth';
 

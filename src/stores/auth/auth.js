@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase";
+import { auth } from "@/config/firebase";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({

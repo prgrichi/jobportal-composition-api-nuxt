@@ -6,11 +6,11 @@
 
     <div class="min-h-screen bg-gray-50">
       <header class="border-b border-gray-200 bg-white">
-        <div class="mx-auto max-w-6xl px-4 py-5">
+        <div class="mx-auto max-w-app px-4 py-5">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
               <RouterLink to="/jobs"
-                class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                class="inline-flex items-center gap-2 rounded-xl px-3 md:px-0 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                 <span aria-hidden="true">←</span>
                 Jobs
               </RouterLink>
@@ -34,7 +34,7 @@
         </div>
       </header>
 
-      <section class="mx-auto max-w-6xl px-4 py-8">
+      <section class="mx-auto max-w-app px-4 py-8">
         <div class="grid gap-6 lg:grid-cols-12">
           <div class="lg:col-span-7">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">

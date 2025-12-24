@@ -80,6 +80,8 @@ router.beforeEach(async (to, from, next) => {
     });
   }
 
+  console.log(from);
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({
       name: 'login',

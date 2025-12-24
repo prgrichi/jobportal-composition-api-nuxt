@@ -49,7 +49,7 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import { useToastStore } from '@/stores/toast/toast';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/firebase';
+import { auth } from '@/config/firebase';
 
 export default {
   name: 'AuthForm',
