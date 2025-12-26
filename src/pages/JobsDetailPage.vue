@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="jobStore.isLoading">Lädt... </div>
+  <div class="w-full block text-center mt-6" v-if="jobStore.isLoading">Lädt... </div>
   <div v-else-if="jobStore.error">{{ job.error }}</div>
   <div v-else-if="job">
 
