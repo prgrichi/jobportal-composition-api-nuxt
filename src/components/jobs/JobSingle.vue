@@ -8,6 +8,7 @@
       <div class="flex items-start justify-between gap-3 w-full">
         <div class="w-full">
           <div class="flex justify-between gap-2 mb-1">
+            <p class="text-xs text-neutral-500">{{ job.level }}</p>
             <p class="text-xs text-neutral-500">{{ timeToDate }}</p>
             <p class="text-xs text-neutral-500">{{ job.id }}</p>
           </div>

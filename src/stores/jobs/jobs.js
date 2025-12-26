@@ -13,6 +13,7 @@ export const useJobStore = defineStore('jobs', {
 
     searchText: '',
     selectedLocation: '',
+    selectedLevel: '',
 
     lastVisible: null,
     hasMore: true,
@@ -27,6 +28,14 @@ export const useJobStore = defineStore('jobs', {
 
       // Set entfernt automatisch Duplikate
       return [...new Set(locations)].sort();
+    },
+    availableLevels(state) {
+      const levels = state.jobs
+        .map(job => job.level)
+        .filter(level => level);
+
+      // Set entfernt automatisch Duplikate
+      return [...new Set(levels)].sort();
     },
     filteredJobs(state) {
       let result = state.jobs;
@@ -45,6 +54,10 @@ export const useJobStore = defineStore('jobs', {
       // Location-Filter
       if (state.selectedLocation) {
         result = result.filter(job => job.location === state.selectedLocation);
+      }
+      // Level-Filter
+      if (state.selectedLevel) {
+        result = result.filter(job => job.level === state.selectedLevel);
       }
 
       return result;
@@ -186,6 +199,7 @@ export const useJobStore = defineStore('jobs', {
     resetFilters() {
       this.searchText = '';
       this.selectedLocation = '';
+      this.selectedLevel = '';
     }
   }
 

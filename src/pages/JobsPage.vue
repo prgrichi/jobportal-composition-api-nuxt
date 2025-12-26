@@ -1,5 +1,5 @@
 <template>
-  <section class="py-12">
+  <section class="py-6 md:py-12">
     <div class="max-w-app mx-auto px-4">
       <h1 class="text-2xl font-semibold text-neutral-900 mb-6">{{ $t('jobs.headline') }}</h1>
       <Jobs />
