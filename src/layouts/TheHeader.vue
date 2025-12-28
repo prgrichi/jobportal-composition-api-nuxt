@@ -1,18 +1,19 @@
 <template>
   <header class="sticky top-0 z-40 border-b border-neutral-200 bg-white/80 backdrop-blur-sm">
 
-    <div class="border-b border-neutral-100 bg-neutral-100">
+    <!-- <div class="border-b border-neutral-100 bg-neutral-100"> -->
+    <div class="border-b border-neutral-100 bg-primary-500">
       <div class="mx-auto max-w-app px-4">
         <div class="flex h-10 items-center justify-end gap-4 text-xs">
-          <p class="text-neutral-600 hover:text-neutral-900 transition after:content-['/'] after:ml-4"
-            v-if="authStore.isAuthenticated">{{ $t('nav.userGreeting') }}, {{
+          <p class="text-white transition after:content-['/'] after:ml-4" v-if="authStore.isAuthenticated">{{
+            $t('nav.userGreeting') }}, {{
               authStore.userName }}</p>
 
           <!-- Language Switcher -->
           <div class="flex items-center gap-2" aria-label="Sprachwahl">
-            <button :class="deClasses" @click="changeLang('de')" class="cursor-pointer text-neutral-600">DE</button>
+            <button :class="deClasses" @click="changeLang('de')" class="cursor-pointer text-white">DE</button>
             <span class="text-neutral-300" aria-hidden="true">|</span>
-            <button :class="enClasses" @click="changeLang('en')" class="cursor-pointer text-neutral-600">EN</button>
+            <button :class="enClasses" @click="changeLang('en')" class="cursor-pointer text-white">EN</button>
           </div>
           <!-- Optional:  Weitere Meta-Links -->
         </div>
@@ -34,16 +35,12 @@
             {{ $t('nav.link.job') }}
           </RouterLink>
 
-          <RouterLink :to="{ name: 'login' }" v-if="!isAuthenticated"
-            class="text-neutral-600 hover:text-neutral-900 transition">
+          <RouterLink :to="{ name: 'login' }" v-if="!isAuthenticated" class="btn btn-secondary">
             {{ $t('general.btn.login') }}
           </RouterLink>
 
-          <RouterLink :to="{ name: 'register' }" v-if="!isAuthenticated" class="inline-flex items-center justify-center rounded-lg
-          bg-primary-500 px-4 py-2
-                        text-sm font-medium text-white
-                        transition hover:bg-primary-600
-                        focus:outline-none focus:ring-2 focus:ring-primary-500/30">{{ $t('general.btn.register') }}
+          <RouterLink :to="{ name: 'register' }" v-if="!isAuthenticated" class="btn btn-primary">{{
+            $t('general.btn.register') }}
           </RouterLink>
 
           <button v-if="isAuthenticated" class="btn btn-secondary" @click="handleLogout">
@@ -86,12 +83,12 @@ export default {
     deClasses() {
       return this.currentLocale === 'de'
         ? 'font-bold text-primary-600'
-        : 'text-neutral-600 hover:text-neutral-900';
+        : 'text-neutral-600';
     },
     enClasses() {
       return this.currentLocale === 'en'
         ? 'font-bold text-primary-600'
-        : 'text-neutral-600 hover:text-neutral-900';
+        : 'text-neutral-600';
     }
   },
   methods: {

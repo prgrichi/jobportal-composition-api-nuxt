@@ -2,47 +2,46 @@
 
 <template>
   <RouterLink :to="`/jobs/${job.id}`" class="block">
-    <article class="group rounded-2xl border border-neutral-200 bg-white p-5 transition
-           hover:-translate-y-0.5 hover:shadow-lg hover:border-primary-500/30">
+    <article class="group relative overflow-hidden rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300
+         hover:shadow-sm hover:border-primary-500/30
+         ">
       <!-- Header -->
-      <div class="flex items-start justify-between gap-3 w-full">
-        <div class="w-full">
-          <div class="flex justify-between gap-2 mb-1">
-            <p class="text-xs text-neutral-500">{{ job.level }}</p>
-            <p class="text-xs text-neutral-500">{{ timeToDate }}</p>
-            <p class="text-xs text-neutral-500">{{ job.id }}</p>
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="inline-flex items-center rounded-md bg-primary-50 px-2 py-1 text-xs font-medium text-primary-700">
+              {{ job.level }}
+            </span>
+            <span class="text-xs text-neutral-400">{{ timeToDate }}</span>
           </div>
-          <h3 class="text-sm font-semibold text-neutral-900">
+
+          <h3 class="text-lg font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
             {{ job.title }}
           </h3>
 
-          <p class="mt-1 text-sm text-neutral-600">
+          <div class="mt-2 flex items-center gap-2 text-sm">
             <span class="font-medium text-neutral-800">{{ job.company }}</span>
-            <span class="text-neutral-400"> · </span>
-            <span>{{ job.location }}</span>
-          </p>
+            <span class="h-1 w-1 rounded-full bg-neutral-300"></span>
+            <span class="text-neutral-600">{{ job.location }}</span>
+          </div>
         </div>
       </div>
 
+      <p class="text-sm my-5">{{ job.description }}</p>
+      
       <!-- Tags -->
       <div v-if="job.tags?.length" class="mt-4 flex flex-wrap gap-2">
         <span v-for="tag in job.tags.slice(0, 6)" :key="tag"
-          class="rounded-full bg-neutral-100 px-2.5 py-1 text-xs text-neutral-600">
+          class="rounded-md bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 transition-colors hover:bg-primary-100 hover:text-primary-700">
           {{ tag }}
         </span>
       </div>
 
-      <!-- Footer -->
-      <div class="mt-4 flex items-center justify-between">
-        <p v-if="job.salaryRange" class="text-sm font-medium text-neutral-900">
-          {{ job.salaryRange }}
-        </p>
+      <!-- <div v-if="job.salaryRange" class="text-left mt-4 border-t pt-4 border-neutral-200">
+        <p class="text-sm font-semibold text-neutral-900">{{ job.salaryRange }}</p>
+      </div> -->
 
-        <span
-          class="inline-flex items-center gap-1 text-sm font-medium text-accent-500 transition group-hover:text-accent-600">
-          {{ $t('jobs.details') }} <span aria-hidden="true">→</span>
-        </span>
-      </div>
     </article>
   </RouterLink>
 </template>
@@ -67,7 +66,7 @@ export default {
           month: '2-digit',
           year: 'numeric',
           hour: '2-digit',
-          minute: '2-digit'
+          // minute: '2-digit'
         });
     },
   }

@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-24 border-t-4 border-primary-500/70
+  <footer class="border-t-4 border-primary-500/70
       bg-surface">
     <div class="max-w-app mx-auto px-4 py-12">
 

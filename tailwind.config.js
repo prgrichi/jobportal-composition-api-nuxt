@@ -19,16 +19,15 @@ export default {
         },
 
         primary: {
-          500: "#4F46E5",
-          600: "#4338CA",
-          700: "#3730A3",
+          500: "#EF4444", // Helles Rot
+          600: "#DC2626",
+          700: "#B91C1C",
         },
         accent: {
-          500: "#FB7185",
-          600: "#F43F5E",
+          500: "#FBBF24", // Gold
+          600: "#F59E0B",
         },
-        surface: "#F6F7FF",
-
+        surface: "#fff",
 
 
       },

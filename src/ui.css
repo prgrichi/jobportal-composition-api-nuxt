@@ -40,16 +40,16 @@
   /* //////////////////// */
 
   .btn {
-    @apply cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none;
+    @apply cursor-pointer inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none;
   }
 
   /* Varianten: nicht "@apply btn ..." sondern Utilities wiederholen */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 bg-primary-500 text-white hover:bg-primary-600;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 bg-primary-500 text-white hover:bg-primary-600;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 border border-gray-300 bg-white text-gray-900 hover:bg-gray-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 border border-gray-300 bg-white text-gray-900 hover:bg-gray-100;
   }
 
 }

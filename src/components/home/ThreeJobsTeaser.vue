@@ -6,17 +6,20 @@
           <h2 class="text-lg font-semibold text-neutral-900">
             {{ $t('threejobsteaser.title') }}</h2>
           <p class="mt-1 text-sm text-neutral-600">
-            {{ $t('threejobsteaser.title') }}</p>
+            {{ $t('threejobsteaser.subtitle') }}</p>
         </div>
-        <RouterLink :to="{ name: 'jobs' }" class="hidden md:inline-flex items-center justify-center rounded-xl
-                           border-b-3 border-primary-500/30 bg-white px-4 py-2
-                           text-sm font-medium text-primary-600
-                           transition hover:bg-primary-500/10
-                           focus:outline-none focus:ring-2 focus:ring-primary-500/30">
-          {{ $t('threejobsteaser.viewAll') }}
+        <RouterLink :to="{ name: 'jobs' }" class="">
+          <span
+            class="relative
+             after:absolute after:bottom-0 after:left-0 after:h-[2px] 
+             after:w-0 after:bg-primary-600 after:transition-all after:duration-300
+             hover:after:w-full inline-flex items-center gap-1 text-sm font-medium text-primary-500 transition group-hover:text-primary-600">
+            {{ $t('threejobsteaser.viewAll') }} <span aria-hidden="true">→</span>
+          </span>
+
         </RouterLink>
       </div>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <template v-if="!authStore.authReady || jobStore.isLoading">
           <JobSkeleton v-for="n in 3" :key="`sk-${n}`" />
         </template>

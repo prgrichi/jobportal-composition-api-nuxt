@@ -20,7 +20,7 @@
         </div>
 
         <!-- Liste -->
-        <div class="rounded-2xl border border-neutral-200 bg-white divide-y divide-neutral-200">
+        <div class="rounded-xl border border-neutral-200 bg-white divide-y divide-neutral-200">
           <div class="p-6 md:p-7">
             <h3 class="font-medium text-neutral-900">
               Relevante Stellen

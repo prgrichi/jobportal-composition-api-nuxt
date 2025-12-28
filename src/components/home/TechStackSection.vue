@@ -13,14 +13,14 @@
         </p>
       </div>
 
-      <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+      <div class="rounded-l border border-gray-200 bg-white overflow-hidden">
         <div class="grid lg:grid-cols-2 lg:divide-x lg:divide-gray-200">
 
           <!-- Spalte links -->
           <div class="divide-y divide-gray-200">
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-         bg-primary-100 text-xs font-mono font-medium text-accent-500">
+         bg-primary-100 text-xs font-mono font-medium text-primary-500">
                 01
               </span>
               <div>
@@ -33,7 +33,7 @@
 
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-         bg-primary-100 text-xs font-mono font-medium text-accent-600">
+         bg-primary-100 text-xs font-mono font-medium text-primary-600">
                 02
               </span>
               <div>
@@ -46,7 +46,7 @@
 
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-                  bg-primary-100 text-xs font-mono font-medium text-accent-600">
+                  bg-primary-100 text-xs font-mono font-medium text-primary-600">
                 03
               </span>
               <div>
@@ -62,7 +62,7 @@
           <div class="divide-y divide-gray-200">
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-                  bg-primary-100 text-xs font-mono font-medium text-accent-600">
+                  bg-primary-100 text-xs font-mono font-medium text-primary-600">
                 04
               </span>
               <div>
@@ -75,7 +75,7 @@
 
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-                  bg-primary-100 text-xs font-mono font-medium text-accent-600">
+                  bg-primary-100 text-xs font-mono font-medium text-primary-600">
                 05
               </span>
               <div>
@@ -88,7 +88,7 @@
 
             <div class="flex items-start gap-6 p-6">
               <span class="flex h-8 w-8 items-center justify-center rounded-full
-                  bg-primary-100 text-xs font-mono font-medium text-accent-600">
+                  bg-primary-100 text-xs font-mono font-medium text-primary-600">
                 06
               </span>
               <div>

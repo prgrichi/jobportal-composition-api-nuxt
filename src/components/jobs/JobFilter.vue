@@ -2,7 +2,7 @@
   <div class="max-w-app mx-auto py-4 space-y-6">
 
     <!-- Filter -->
-    <section class="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+    <section class="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
       <h3 class="text-lg font-semibold text-gray-900 mb-4">
         {{ $t('jobs.filter.headline') }}
       </h3>

@@ -74,28 +74,28 @@
               </div>
 
               <div class="mt-4 grid grid-cols-2 gap-3">
-                <div class="rounded-2xl bg-gray-50 p-3">
+                <div class="rounded-xl bg-gray-50 p-3">
                   <p class="text-xs text-gray-500">Anstellung</p>
                   <p class="mt-1 text-sm font-semibold text-gray-900">
                     {{ job.employmentType }}
                   </p>
                 </div>
 
-                <div class="rounded-2xl bg-gray-50 p-3">
+                <div class="rounded-xl bg-gray-50 p-3">
                   <p class="text-xs text-gray-500">Arbeitsmodell</p>
                   <p class="mt-1 text-sm font-semibold text-gray-900">
                     {{ remoteLabel }}
                   </p>
                 </div>
 
-                <div class="rounded-2xl bg-gray-50 p-3">
+                <div class="rounded-xl bg-gray-50 p-3">
                   <p class="text-xs text-gray-500">Ort</p>
                   <p class="mt-1 text-sm font-semibold text-gray-900">
                     {{ job.location }}
                   </p>
                 </div>
 
-                <div class="rounded-2xl bg-gray-50 p-3">
+                <div class="rounded-xl bg-gray-50 p-3">
                   <p class="text-xs text-gray-500">Erstellt</p>
                   <p class="mt-1 text-sm font-semibold text-gray-900">
                     {{ createdAtDE }}
@@ -128,7 +128,7 @@
             <h2 class="text-sm font-semibold text-gray-900">Aufgaben</h2>
             <ul class="mt-3 space-y-2 text-sm text-gray-700">
               <li v-for="item in job.responsibilities" :key="item" class="flex gap-3">
-                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-600"></span>
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-600"></span>
                 <span class="leading-6">{{ item }}</span>
               </li>
             </ul>
@@ -139,7 +139,7 @@
             <h2 class="text-sm font-semibold text-gray-900">Profil</h2>
             <ul class="mt-3 space-y-2 text-sm text-gray-700">
               <li v-for="item in job.requirements" :key="item" class="flex gap-3">
-                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-600"></span>
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-600"></span>
                 <span class="leading-6">{{ item }}</span>
               </li>
             </ul>
@@ -161,7 +161,7 @@
                 Speichern
               </button>
               <button type="button" class="btn btn-primary">
-                Jetzt bewerben
+                Bewerben
               </button>
             </div>
           </div>
@@ -193,7 +193,7 @@ export default {
       return this.jobStore.singleJob;
     },
     createdAtDE() {
-      const date = this.job.createdAt ? this.job.createdAt.toDate() : new Date(); 
+      const date = this.job.createdAt ? this.job.createdAt.toDate() : new Date();
       return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
     },
     remoteLabel() {
