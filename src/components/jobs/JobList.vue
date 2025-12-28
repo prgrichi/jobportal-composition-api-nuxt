@@ -13,7 +13,7 @@
     </div>
     <!-- DEBUG BOX -->
 
-    <div class="mt-6 grid gap-4 grid-cols-1 md:grid-cols-3">
+    <div class="mt-6 grid gap-4 grid-cols-1 md:grid-cols-2">
 
       <template v-if="jobStore.isLoading">
         <JobSkeleton v-for="n in 6" :key="`sk-${n}`" />

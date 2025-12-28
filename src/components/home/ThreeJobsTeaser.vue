@@ -19,18 +19,18 @@
 
         </RouterLink>
       </div>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <template v-if="!authStore.authReady || jobStore.isLoading">
           <JobSkeleton v-for="n in 3" :key="`sk-${n}`" />
         </template>
 
-        <template v-else-if="authStore.isAuthenticated">
+        <!-- <template v-else-if="authStore.isAuthenticated"> -->
           <JobSingle v-for="job in jobStore.jobs" :key="job.id" :job="job" />
-        </template>
+        <!-- </template> -->
 
-        <template v-else>
+        <!-- <template v-else>
           <ThreeJobsTeaserPlaceholder v-for="n in 3" :key="n" />
-        </template>
+        </template> -->
 
         <template v-if="jobStore.error">
           <div class="col-span-full text-center text-red-500">

@@ -1,8 +1,8 @@
 <!-- @click="saveToStore" in routerlink -->
 
 <template>
-  <RouterLink :to="`/jobs/${job.id}`" class="block">
-    <article class="group relative overflow-hidden rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300
+  <RouterLink :to="`/jobs/${job.id}`" class="flex w-full">
+    <article class="block w-full group relative overflow-hidden rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300
          hover:shadow-sm hover:border-primary-500/30
          ">
       <!-- Header -->
