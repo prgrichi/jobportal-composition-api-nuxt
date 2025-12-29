@@ -41,11 +41,10 @@
     </div>
 
     <div class="inline-flex group/star items-center gap-2 mt-4">
-      <button @click="addToFavorites" class="inline-flex items-center gap-2 cursor-pointer">
-        <Icon name="Star" :type="starType"
-          icon-class="transition-all duration-150 group-hover/star:text-primary-500 h-4 w-4 text-neutral-700" />
+      <button @click="toggleFavorite" class="inline-flex items-center gap-1.5 cursor-pointer">
+        <Icon name="Star" :type="starType" :icon-class="starIconClass" />
         <span
-          class="text-sm text-neutral-700 transition-all duration-150 group-hover/star:text-primary-500">Merken</span>
+          class="text-sm text-primary-500 transition-all duration-150 group-hover/star:underline group-hover/star:underline-offset-4">Merken</span>
       </button>
     </div>
 
@@ -58,6 +57,8 @@
 </template>
 
 <script>
+import { useFavoritesStore } from '@/stores/jobs/favorites';
+
 export default {
   name: 'JobSingle',
   props: {
@@ -68,10 +69,13 @@ export default {
   },
   data() {
     return {
-      isFavorite: false,
+      isAnimating: false
     }
   },
   computed: {
+    favoritesStore() {
+      return useFavoritesStore();
+    },
     timeToDate() {
       const date = this.job?.createdAt?.toDate() || null;
       if (!date) return '';
@@ -85,13 +89,25 @@ export default {
         });
     },
     starType() {
-      return this.isFavorite ? 'solid' : 'outline';
+      return this.isFavorited ? 'solid' : 'outline';
+    },
+    starIconClass() {
+      return [
+        'transition duration-200 h-4 w-4 text-primary-500',
+        this.isAnimating ? 'scale-125' : 'scale-100'
+      ].join(' ');
+    },
+    isFavorited() {
+      return this.favoritesStore.isJobFavorited(this.job.id);
     }
   },
   methods: {
-    addToFavorites() {
-      this.isFavorite = !this.isFavorite;
-      console.log(`Job ${this.job.id} added to favorites.`);
+    toggleFavorite() {
+      this.favoritesStore.toggleFavorite(this.job);
+      this.isAnimating = true;
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 500)
     }
   }
 }
