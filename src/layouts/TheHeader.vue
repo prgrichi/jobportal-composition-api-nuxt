@@ -5,9 +5,12 @@
     <div class="border-b border-neutral-100 bg-primary-500">
       <div class="mx-auto max-w-app px-4">
         <div class="flex h-10 items-center justify-end gap-4 text-xs">
-          <p class="text-white transition after:content-['/'] after:ml-4" v-if="authStore.isAuthenticated">{{
-            $t('nav.userGreeting') }}, {{
-              authStore.userName }}</p>
+          <div v-if="authReady" class="flex items-center gap-2">
+            <Icon name="User" icon-class="h-4 w-4 text-white" />
+            <p class="text-white transition after:content-['/'] after:ml-4" v-if="authStore.isAuthenticated">{{
+              $t('nav.userGreeting') }}, {{
+                authStore.userName }}</p>
+          </div>
 
           <!-- Language Switcher -->
           <div class="flex items-center gap-2" aria-label="Sprachwahl">

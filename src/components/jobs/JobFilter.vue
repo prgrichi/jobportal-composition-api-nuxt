@@ -3,9 +3,12 @@
 
     <!-- Filter -->
     <section class="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
-      <h3 class="text-lg font-semibold text-gray-900 mb-4">
-        {{ $t('jobs.filter.headline') }}
-      </h3>
+      <div class="flex items-center gap-2">
+        <Icon name="AdjustmentsVertical" icon-class="h-4 w-4 text-black mb-4" />
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+          {{ $t('jobs.filter.headline') }}
+        </h3>
+      </div>
 
       <div class="flex flex-col sm:flex-row gap-3 filter-group items-center">
         <label class="sr-only" for="search">Suche</label>
@@ -74,7 +77,7 @@ import DebugBox from '@/components/debug/DebugBox.vue';
 export default {
   name: 'JobFilter',
   components: {
-    DebugBox,
+    DebugBox
   },
   data() {
     return {
