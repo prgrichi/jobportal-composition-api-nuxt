@@ -52,6 +52,7 @@ import * as yup from 'yup';
 import { useToastStore } from '@/stores/toast/toast';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/config/firebase';
+import { useAuthStore } from '@/stores/auth/auth';
 import { useI18n } from 'vue-i18n';
 
 export default {
@@ -87,11 +88,16 @@ export default {
 
     return {
       isLoading: false,
-      toast: useToastStore(),
       schema: yup.object(this.mode === 'register' ? registerSchema : baseSchema),
     };
   },
   computed: {
+    authStore() {
+      return useAuthStore();
+    },
+    toast() {
+      return useToastStore();
+    },
     submitLabel() {
       if (this.mode === 'register') {
         return this.isLoading ? this.t('general.btn.ui.creatingAccount') : this.t('general.btn.ui.createAccount');
@@ -105,11 +111,21 @@ export default {
         this.isLoading = true;
 
         if (this.mode === 'register') {
-          await createUserWithEmailAndPassword(auth, values.email, values.password);
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+          );
+          await this.authStore.createUserDocument(userCredential.user);
           this.toast.success(this.t('toast.registerSuccess'));
           this.$router.push({ name: 'home' });
         } else {
-          await signInWithEmailAndPassword(auth, values.email, values.password);
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+          );
+          await this.authStore.createUserDocument(userCredential.user);
           this.toast.success(this.t('toast.loginSuccess'));
           const redirectPath = this.$route.query.redirect || '/';
           this.$router.push(redirectPath);

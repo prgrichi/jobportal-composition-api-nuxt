@@ -3,14 +3,14 @@
   <section class="space-y-4">
 
     <!-- DEBUG BOX -->
-    <div>
+    <!-- <div>
       <DebugBox>
         isLoading: {{ jobStore.isLoading }}<br>
         isLoadingMore: {{ jobStore.isLoadingMore }}<br>
         hasMore: {{ jobStore.hasMore }}<br>
         Jobs: {{ jobStore.jobs.length }}
       </DebugBox>
-    </div>
+    </div> -->
     <!-- DEBUG BOX -->
 
     <div class="mt-6 grid gap-4 grid-cols-1 md:grid-cols-2">

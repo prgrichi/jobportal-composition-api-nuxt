@@ -22,6 +22,6 @@ export const useToastStore = defineStore('toast', {
 
     error(message) {
       this.show(message, 'error');
-    },
+    }
   },
 });

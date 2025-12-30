@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from "@/config/firebase";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -21,10 +22,31 @@ export const useAuthStore = defineStore('auth', {
     init() {
       if (this.authReady) return;
 
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async (user) => {
         this.user = user;
+        if (user) {
+          console.log('🔐 User eingeloggt:', user.uid);
+          await this.createUserDocument(user);
+        }
         this.authReady = true;
       });
-    }
+    },
+
+    async createUserDocument(user) {
+      const userRef = doc(db, 'users', user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          email: user.email,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+        console.log('✅ User-Dokument erstellt für:', user.uid);
+      } else {
+        console.log('ℹ️ User-Dokument existiert bereits');
+      }
+    },
+
   },
 });

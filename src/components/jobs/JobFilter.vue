@@ -55,13 +55,13 @@
       </div>
 
       <!-- DEBUG BOX -->
-      <div>
+      <!-- <div>
         <DebugBox>
           <div>searchText: "{{ jobStore.searchText }}"</div>
           <div>selectedLocation: "{{ jobStore.selectedLocation }}"</div>
           <div>selectedLevel: "{{ jobStore.selectedLevel }}" (Type: {{ typeof jobStore.selectedLevel }})</div>
         </DebugBox>
-      </div>
+      </div> -->
       <!-- DEBUG BOX -->
 
     </section>

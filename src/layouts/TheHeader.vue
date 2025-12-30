@@ -1,7 +1,6 @@
 <template>
   <header class="sticky top-0 z-40 border-b border-neutral-200 bg-white/80 backdrop-blur-sm">
 
-    <!-- <div class="border-b border-neutral-100 bg-neutral-100"> -->
     <div class="border-b border-neutral-100 bg-primary-500">
       <div class="mx-auto max-w-app px-4">
         <div class="flex h-10 items-center justify-end gap-4 text-xs">
@@ -34,11 +33,12 @@
         <!-- Navigation -->
         <nav v-if="authReady" aria-label="Hauptnavigation" class="flex items-center gap-6 text-sm">
 
-          <RouterLink :to="{ name: 'favoriteJobs' }"  v-if="isAuthenticated" 
-            class="inline-flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition">
-            Meine Jobs
+          <RouterLink :to="{ name: 'favoriteJobs' }"
+            class="inline-flex items-center text-neutral-600 hover:text-neutral-900 transition">
+            <Icon name="LockClosed" v-if="!isAuthenticated" icon-class="me-[2px] h-4 w-4 text-neutral-600 " />
+            {{ $t('nav.link.favoriteJobs') }}
             <span v-if="favoritesStore.favoriteCount > 0"
-              class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary-500 text-[11px] font-semibold text-white">
+              class="ms-[5px] inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary-500 text-[11px] font-semibold text-white">
               {{ favoritesStore.favoriteCount }}
             </span>
           </RouterLink>
