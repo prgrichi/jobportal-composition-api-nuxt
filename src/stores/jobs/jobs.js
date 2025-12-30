@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { collection, query, orderBy, where, startAfter, limit, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, where, startAfter, limit, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 
 export const useJobStore = defineStore('jobs', {
@@ -22,185 +22,196 @@ export const useJobStore = defineStore('jobs', {
 
   getters: {
     availableLocations(state) {
-      const locations = state.jobs
-        .map(job => job.location)
-        .filter(location => location);
-
-      // Set entfernt automatisch Duplikate
-      return [...new Set(locations)].sort();
+      return this.getUniqueValues('location');
     },
+
     availableLevels(state) {
-      const levels = state.jobs
-        .map(job => job.level)
-        .filter(level => level);
-
-      // Set entfernt automatisch Duplikate
-      return [...new Set(levels)].sort();
+      return this.getUniqueValues('level');
     },
+
     filteredJobs(state) {
-      let result = state.jobs;
+      return state.jobs.filter(job => {
+        // Text-Filter
+        if (state.searchText) {
+          const search = state.searchText.toLowerCase();
+          const title = job.title?.toLowerCase() || '';
+          const company = job.company?.toLowerCase() || '';
 
-      // Text-Filter
-      if (state.searchText) {
-        const search = state.searchText.toLowerCase();
-        result = result.filter(job => {
-          const title = job.title?.toLowerCase() || ''
-          const company = job.company?.toLowerCase() || ''
-          return title.includes(search) ||
-            company.includes(search);
-        })
-      }
+          if (!title.includes(search) && !company.includes(search)) {
+            return false;
+          }
+        }
 
-      // Location-Filter
-      if (state.selectedLocation) {
-        result = result.filter(job => job.location === state.selectedLocation);
-      }
-      // Level-Filter
-      if (state.selectedLevel) {
-        result = result.filter(job => job.level === state.selectedLevel);
-      }
+        // Location-Filter
+        if (state.selectedLocation && job.location !== state.selectedLocation) {
+          return false;
+        }
 
-      return result;
+        // Level-Filter
+        if (state.selectedLevel && job.level !== state.selectedLevel) {
+          return false;
+        }
+
+        return true;
+      });
     },
+
   },
 
   actions: {
+    // Helper für unique values
+    getUniqueValues(field) {
+      const values = this.jobs
+        .map(job => job[field])
+        .filter(Boolean);
+
+      return [...new Set(values)].sort();
+    },
+
+    // Query-Builder
+    buildQuery(options = {}) {
+      const jobsRef = collection(db, 'jobs');
+      const queryParams = [jobsRef];
+
+      if (options.orderBy) {
+        queryParams.push(orderBy(options.orderBy.field, options.orderBy.direction));
+      }
+
+      if (options.startAfter) {
+        queryParams.push(startAfter(options.startAfter));
+      }
+
+      const itemLimit = options.limit || this.pageSize;
+      queryParams.push(limit(itemLimit));
+
+      return query(...queryParams);
+    },
+
     async fetchJobs(options = {}) {
       this.isLoading = true;
       this.error = null;
 
-      this.jobs = [];           // Alte Jobs löschen
-      this.lastVisible = null;  // Bookmark zurücksetzen
-      this.hasMore = true;      // Könnte mehr geben
+      this.jobs = [];
+      this.lastVisible = null;
+      this.hasMore = true;
 
       try {
-        const jobsRef = collection(db, 'jobs');
-        const queryParams = [jobsRef];
-
-
-        if (options.orderBy) {
-          queryParams.push(orderBy(options.orderBy.field, options.orderBy.direction));
-        }
-        if (options.limit) {
-          queryParams.push(limit(options.limit));
-        }
-
-        // Limit setzen
-        const itemLimit = options.limit || this.pageSize;
-        queryParams.push(limit(itemLimit));
-
-        const q = queryParams.length > 1 ? query(...queryParams) : jobsRef;
+        const q = this.buildQuery(options);
         const querySnapshot = await getDocs(q);
 
         this.jobs = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
-        }))
+        }));
 
-        // Letztes Dokument speichern für Pagination
-        this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+        const docs = querySnapshot.docs;
+        this.lastVisible = docs.length > 0 ? docs[docs.length - 1] : null;
+        this.hasMore = docs.length === (options.limit || this.pageSize);
 
-        // Prüfen ob es mehr gibt
-        this.hasMore = querySnapshot.docs.length === itemLimit;
-
+        console.log(`✅ ${this.jobs.length} Jobs geladen`);
       } catch (err) {
-        console.error('Fehler beim Laden der Jobs:', err);
-        this.error = 'Jobs konnten nicht geladen werden.';
+        console.error('❌ Fehler beim Laden:', err);
+        this.error = 'Jobs konnten nicht geladen werden. ';
       } finally {
         this.isLoading = false;
       }
     },
 
     async loadMoreJobs(options = {}) {
-      console.log('🔄 Load More gestartet');
-      console.log('📍 lastVisible:', this.lastVisible?.id);
-      console.log('📊 Aktuelle Jobs:', this.jobs.length);
-      if (!this.hasMore || this.isLoadingMore) return;
+      if (!this.hasMore || this.isLoadingMore || !this.lastVisible) {
+        console.log('⚠️ Load More abgebrochen');
+        return;
+      }
 
       this.isLoadingMore = true;
       this.error = null;
 
+      console.log('🔄 Lade mehr Jobs...  Aktuell:', this.jobs.length);
+
       try {
-        const jobsRef = collection(db, 'jobs');
-        const queryParams = [jobsRef];
+        const q = this.buildQuery({
+          ...options,
+          startAfter: this.lastVisible
+        });
 
-        if (options.orderBy) {
-          queryParams.push(orderBy(options.orderBy.field, options.orderBy.direction));
-        }
-
-        // Starte nach dem letzten Dokument
-        if (this.lastVisible) {
-          queryParams.push(startAfter(this.lastVisible));
-        }
-
-        queryParams.push(limit(this.pageSize));
-
-        const q = query(...queryParams);
         const querySnapshot = await getDocs(q);
 
-        // ✅ Jobs anhängen (nicht ersetzen!)
         const newJobs = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
 
-        this.jobs = [...this.jobs, ...newJobs];
+        this.jobs.push(...newJobs);
 
-        // Letztes Dokument aktualisieren
-        if (querySnapshot.docs.length > 0) {
-          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+        const docs = querySnapshot.docs;
+        if (docs.length > 0) {
+          this.lastVisible = docs[docs.length - 1];
         }
 
-        // Prüfen ob es noch mehr gibt
-        this.hasMore = querySnapshot.docs.length === this.pageSize;
-        console.log('✅ Neue Jobs:', newJobs.length);
-        console.log('📊 Gesamt jetzt:', this.jobs.length);
-        console.log('🔜 hasMore:', this.hasMore);
+        this.hasMore = docs.length === this.pageSize;
+
+        console.log(`✅ ${newJobs.length} neue Jobs.  Gesamt: ${this.jobs.length}`);
       } catch (err) {
-        console.error('Fehler beim Laden weiterer Jobs:', err);
+        console.error('❌ Fehler beim Nachladen:', err);
         this.error = 'Weitere Jobs konnten nicht geladen werden.';
       } finally {
         this.isLoadingMore = false;
       }
     },
 
+    // direkt per Document-ID
     async fetchJobById(jobId) {
       this.isLoading = true;
       this.error = null;
-      console.log('🔍 Suche Job mit ID:', jobId);
+      this.singleJob = null;
+
+      console.log('🔍 Lade Job:', jobId);
 
       try {
-        const jobsRef = collection(db, 'jobs');
-        const q = query(jobsRef, where('id', '==', jobId));
-        const querySnapshot = await getDocs(q);
+        const jobDoc = await getDoc(doc(db, 'jobs', jobId));
 
-        if (!querySnapshot.empty) {
-          const jobDoc = querySnapshot.docs[0];
-          const jobData = {
+        if (jobDoc.exists()) {
+          this.singleJob = {
             id: jobDoc.id,
             ...jobDoc.data()
           };
-          console.log('✅ Job gefunden:', jobData);
-          this.singleJob = jobData;
+          console.log('✅ Job geladen:', this.singleJob.title);
+          return this.singleJob;
         } else {
-          console.log('❌ Kein Job mit id-Feld:', jobId);
+          console.log('❌ Job nicht gefunden:', jobId);
           this.error = 'Job nicht gefunden';
           return null;
         }
       } catch (err) {
-        console.error('💥 Fehler:', err);
-        this.error = 'Fehler beim Laden';
+        console.error('❌ Fehler beim Laden:', err);
+        this.error = 'Fehler beim Laden des Jobs';
         return null;
       } finally {
         this.isLoading = false;
       }
     },
 
+    // job aus Cache holen
+    getJobFromCache(jobId) {
+      return this.jobs.find(job => job.id === jobId) || null;
+    },
+
+    // job laden mit Cache Fallback
+    async fetchJobByIdWithCache(jobId) {
+      const cachedJob = this.getJobFromCache(jobId);
+      if (cachedJob) {
+        console.log('💾 Job aus Cache:', jobId);
+        this.singleJob = cachedJob;
+        return cachedJob;
+      }
+
+      return await this.fetchJobById(jobId);
+    },
+
     resetFilters() {
       this.searchText = '';
       this.selectedLocation = '';
       this.selectedLevel = '';
-    }
+    },
   }
-
 });
