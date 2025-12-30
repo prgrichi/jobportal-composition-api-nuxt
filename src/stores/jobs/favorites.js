@@ -7,6 +7,7 @@ import { useToastStore } from '@/stores/toast/toast';
 export const useFavoritesStore = defineStore('favorites', {
   state: () => ({
     favoriteJobs: [],
+    loading: false,
   }),
 
   getters: {
@@ -33,8 +34,9 @@ export const useFavoritesStore = defineStore('favorites', {
         return;
       }
 
+      this.loading = true;
+
       try {
-        // Subcollection:  users/{userId}/favorites
         const favoritesRef = collection(db, 'users', userId, 'favorites');
         const snapshot = await getDocs(favoritesRef);
 
@@ -47,6 +49,8 @@ export const useFavoritesStore = defineStore('favorites', {
       } catch (error) {
         this.toast.error('Fehler beim Laden der Favoriten');
         console.error('❌ Fehler beim Laden:', error);
+      } finally {
+        this.loading = false;
       }
     },
 

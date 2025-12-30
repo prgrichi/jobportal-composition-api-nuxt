@@ -1,16 +1,31 @@
 <template>
   <section class="py-6 md:py-12">
     <div class="max-w-app mx-auto px-4">
-      <h2 class="text-2xl font-bold text-neutral-900 mb-4">Meine Jobs</h2>
-      <p>Du hast noch keine gespeicherten Jobs</p>
+
+      <JobsFavorite />
+
     </div>
   </section>
 </template>
 
 <script>
+import { useFavoritesStore } from '@/stores/jobs/favorites';
+import JobsFavorite from '@/components/jobs/JobsFavorite.vue';
 
 export default {
-  name: 'FavoriteJobsPage'
+  name: 'FavoriteJobsPage',
+  components: {
+    JobsFavorite
+  },
+
+  computed: {
+    // favoritesStore() {
+    //   return useFavoritesStore();
+    // },
+    // favoritesFoundCount() {
+    //   return this.favoritesStore.favoriteJobs.length;
+    // },
+  }
 }
 </script>
 
