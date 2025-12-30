@@ -16,7 +16,7 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="flex gap-6 text-sm">
+        <nav v-if="authReady" class="flex gap-6 text-sm">
           <RouterLink :to="{ name: 'home' }" class="text-neutral-600 hover:text-primary-600 transition">
             {{ $t('footer.link.homepage') }}
           </RouterLink>
