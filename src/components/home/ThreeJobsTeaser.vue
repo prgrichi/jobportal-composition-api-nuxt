@@ -24,13 +24,9 @@
           <JobSkeleton v-for="n in 3" :key="`sk-${n}`" />
         </template>
 
-        <!-- <template v-else-if="authStore.isAuthenticated"> -->
+        <!-- <template v-if="authStore.isAuthenticated"> -->
           <JobSingle v-for="job in jobStore.jobs" :key="job.id" :job="job" />
         <!-- </template> -->
-
-        <!-- <template v-else>
-          <ThreeJobsTeaserPlaceholder v-for="n in 3" :key="n" />
-        </template> -->
 
         <template v-if="jobStore.error">
           <div class="col-span-full text-center text-red-500">

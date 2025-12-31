@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 
 export const useProfileStore = defineStore('profile', {
@@ -25,6 +25,28 @@ export const useProfileStore = defineStore('profile', {
         console.error('Error loading profile:', error);
       } finally {
         this.loading = false;
+      }
+    },
+
+    async updateProfile(userId, profileData) {
+      try {
+        // 1. Firestore update
+        await setDoc(doc(db, 'users', userId), {
+          ...profileData,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+
+        // 2. Lokalen State aktualisieren (kein Reload nötig!)
+        this.profile = {
+          ...this.profile,
+          ...profileData
+        };
+
+        return { success: true };
+
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        return { success: false, error };
       }
     },
 
