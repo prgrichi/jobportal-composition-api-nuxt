@@ -22,16 +22,21 @@
       </div>
     </div>
 
-    <div class="mx-auto max-w-app px-4">
+    <div class="mx-auto max-w-app flex justify-between md:block">
 
-      <div class="flex h-16 items-center justify-between">
+      <div class="flex h-16 items-center px-4 w-full justify-between relative">
 
         <!-- Logo -->
         <RouterLink :to="{ name: 'home' }" class="text-sm font-semibold text-neutral-900">{{ $t('nav.link.homepage') }}
         </RouterLink>
 
+        <button v-if="authReady" @click="toggleMenu" class="md:hidden p-2 text-neutral-600">
+          <Icon :name="mobileMenuOpen ? 'XMark' : 'Bars3'" icon-class="h-6 w-6" />
+        </button>
+
         <!-- Navigation -->
-        <nav v-if="authReady" aria-label="Hauptnavigation" class="flex items-center gap-6 text-sm">
+        <nav v-if="authReady" aria-label="Hauptnavigation"
+          :class="['text-sm', mobileMenuOpen ? 'h-[calc(100vh-106px)] flex flex-col absolute top-16 w-full left-0 right-0 bg-white border-b border-neutral-200 p-4 gap-4' : 'hidden md:flex items-center gap-6']">
 
           <template v-if="authStore.isAuthenticated">
             <RouterLink :to="{ name: 'favoriteJobs' }"
@@ -83,10 +88,10 @@
           <button v-if="isAuthenticated" class="btn btn-secondary" @click="handleLogout">
             {{ $t('general.btn.logout') }}
           </button>
-
         </nav>
 
       </div>
+
     </div>
   </header>
 </template>
@@ -98,12 +103,17 @@ import { useToastStore } from '@/stores/toast/toast';
 import { useAuthStore } from '@/stores/auth/auth';
 import { useFavoritesStore } from '@/stores/jobs/favorites';
 import { useModalStore } from '@/stores/ui/modal';
+import DebugBox from '@/components/debug/DebugBox.vue';
 
 export default {
   name: 'TheHeader',
+  components: {
+    DebugBox
+  },
   data() {
     return {
       activeClasses: false,
+      mobileMenuOpen: false
     }
   },
   computed: {
@@ -140,6 +150,10 @@ export default {
     }
   },
   methods: {
+    toggleMenu() {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
+
+    },
     changeLang(lang) {
       this.$i18n.locale = lang;
     },

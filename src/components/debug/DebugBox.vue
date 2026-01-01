@@ -27,8 +27,8 @@ export default {
 <style scoped>
 .debug-box {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 400px;
+  left: 10px;
   background: #ffeb3b;
   border: 2px solid #333;
   border-radius: 4px;

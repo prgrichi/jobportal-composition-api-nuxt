@@ -7,7 +7,9 @@ import {
   UserIcon,
   AdjustmentsVerticalIcon,
   StarIcon,
-  LockClosedIcon
+  LockClosedIcon,
+  Bars3Icon,
+  XMarkIcon
 } from '@heroicons/vue/24/outline';
 
 import {
@@ -19,7 +21,9 @@ const ICONS = {
     User: UserIcon,
     AdjustmentsVertical: AdjustmentsVerticalIcon,
     Star: StarIcon,
-    LockClosed: LockClosedIcon
+    LockClosed: LockClosedIcon,
+    Bars3: Bars3Icon,
+    XMark: XMarkIcon
   },
   solid: {
     Star: StarIconSolid,
