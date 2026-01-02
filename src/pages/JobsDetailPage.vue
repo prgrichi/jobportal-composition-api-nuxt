@@ -21,15 +21,6 @@
                 {{ job.id }}
               </span>
             </div>
-
-            <div class="flex flex-wrap gap-2">
-              <button type="button" class="btn btn-secondary">
-                Speichern
-              </button>
-              <button type="button" class="btn btn-primary">
-                Bewerben
-              </button>
-            </div>
           </div>
         </div>
       </header>
@@ -176,6 +167,7 @@
 
 <script>
 import { useJobStore } from '@/stores/jobs/jobs';
+import { useAuthStore } from '@/stores/auth/auth';
 
 export default {
   name: "JobDetailPage",
@@ -188,6 +180,9 @@ export default {
   computed: {
     jobStore() {
       return useJobStore();
+    },
+    authStore() {
+      return useAuthStore();
     },
     job() {
       return this.jobStore.singleJob;

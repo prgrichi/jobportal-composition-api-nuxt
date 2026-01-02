@@ -1,3 +1,4 @@
+// stores/jobs/jobs.js
 import { defineStore } from 'pinia';
 import { collection, query, orderBy, startAfter, limit, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
@@ -6,15 +7,12 @@ export const useJobStore = defineStore('jobs', {
   state: () => ({
     jobs: [],
     singleJob: null,
-
     isLoading: false,
     isLoadingMore: false,
     error: null,
-
     searchText: '',
     selectedLocation: '',
     selectedLevel: '',
-
     lastVisible: null,
     hasMore: true,
     pageSize: 6,
@@ -24,51 +22,49 @@ export const useJobStore = defineStore('jobs', {
     availableLocations(state) {
       return this.getUniqueValues('location');
     },
-
     availableLevels(state) {
       return this.getUniqueValues('level');
     },
-
     filteredJobs(state) {
       return state.jobs.filter(job => {
-        // Text-Filter
         if (state.searchText) {
           const search = state.searchText.toLowerCase();
           const title = job.title?.toLowerCase() || '';
           const company = job.company?.toLowerCase() || '';
-
           if (!title.includes(search) && !company.includes(search)) {
             return false;
           }
         }
-
-        // Location-Filter
         if (state.selectedLocation && job.location !== state.selectedLocation) {
           return false;
         }
-
-        // Level-Filter
         if (state.selectedLevel && job.level !== state.selectedLevel) {
           return false;
         }
-
         return true;
       });
     },
-
   },
 
   actions: {
-    // Helper für unique values
+    mapDocToJob(doc) {
+      const data = doc.data();
+      const { id: jobNumber, ...otherData } = data;
+
+      return {
+        id: doc.id,
+        jobNumber,
+        ...otherData
+      };
+    },
+
     getUniqueValues(field) {
       const values = this.jobs
         .map(job => job[field])
         .filter(Boolean);
-
       return [...new Set(values)].sort();
     },
 
-    // Query-Builder
     buildQuery(options = {}) {
       const jobsRef = collection(db, 'jobs');
       const queryParams = [jobsRef];
@@ -90,7 +86,6 @@ export const useJobStore = defineStore('jobs', {
     async fetchJobs(options = {}) {
       this.isLoading = true;
       this.error = null;
-
       this.jobs = [];
       this.lastVisible = null;
       this.hasMore = true;
@@ -99,10 +94,7 @@ export const useJobStore = defineStore('jobs', {
         const q = this.buildQuery(options);
         const querySnapshot = await getDocs(q);
 
-        this.jobs = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+        this.jobs = querySnapshot.docs.map(doc => this.mapDocToJob(doc));
 
         const docs = querySnapshot.docs;
         this.lastVisible = docs.length > 0 ? docs[docs.length - 1] : null;
@@ -111,7 +103,7 @@ export const useJobStore = defineStore('jobs', {
         console.log(`✅ ${this.jobs.length} Jobs geladen`);
       } catch (err) {
         console.error('❌ Fehler beim Laden:', err);
-        this.error = 'Jobs konnten nicht geladen werden. ';
+        this.error = 'Jobs konnten nicht geladen werden.';
       } finally {
         this.isLoading = false;
       }
@@ -126,8 +118,6 @@ export const useJobStore = defineStore('jobs', {
       this.isLoadingMore = true;
       this.error = null;
 
-      console.log('🔄 Lade mehr Jobs...  Aktuell:', this.jobs.length);
-
       try {
         const q = this.buildQuery({
           ...options,
@@ -135,11 +125,7 @@ export const useJobStore = defineStore('jobs', {
         });
 
         const querySnapshot = await getDocs(q);
-
-        const newJobs = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+        const newJobs = querySnapshot.docs.map(doc => this.mapDocToJob(doc));
 
         this.jobs.push(...newJobs);
 
@@ -153,13 +139,12 @@ export const useJobStore = defineStore('jobs', {
         console.log(`✅ ${newJobs.length} neue Jobs.  Gesamt: ${this.jobs.length}`);
       } catch (err) {
         console.error('❌ Fehler beim Nachladen:', err);
-        this.error = 'Weitere Jobs konnten nicht geladen werden.';
+        this.error = 'Weitere Jobs konnten nicht geladen werden. ';
       } finally {
         this.isLoadingMore = false;
       }
     },
 
-    // direkt per Document-ID
     async fetchJobById(jobId) {
       this.isLoading = true;
       this.error = null;
@@ -171,10 +156,8 @@ export const useJobStore = defineStore('jobs', {
         const jobDoc = await getDoc(doc(db, 'jobs', jobId));
 
         if (jobDoc.exists()) {
-          this.singleJob = {
-            id: jobDoc.id,
-            ...jobDoc.data()
-          };
+          this.singleJob = this.mapDocToJob(jobDoc);
+
           console.log('✅ Job geladen:', this.singleJob.title);
           return this.singleJob;
         } else {
@@ -191,12 +174,10 @@ export const useJobStore = defineStore('jobs', {
       }
     },
 
-    // job aus Cache holen
     getJobFromCache(jobId) {
       return this.jobs.find(job => job.id === jobId) || null;
     },
 
-    // job laden mit Cache Fallback
     async fetchJobByIdWithCache(jobId) {
       const cachedJob = this.getJobFromCache(jobId);
       if (cachedJob) {
