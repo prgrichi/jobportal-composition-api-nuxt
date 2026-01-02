@@ -1,35 +1,49 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts}"],
+  darkMode: 'selector',
   theme: {
-    screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
-    },
     extend: {
       colors: {
+        // === Einheitliche Grau-Palette ===
         neutral: {
           900: "#0F172A",
+          800: "#1E293B",
           700: "#1F2937",
           600: "#4B5563",
+          500: "#6B7280",
+          400: "#9CA3AF",
+          300: "#D1D5DB",
           200: "#E5E7EB",
           100: "#F8FAFC",
+          50: "#F9FAFB",
         },
 
+        // === Primary (Rot) ===
         primary: {
-          500: "#EF4444", // Helles Rot
-          600: "#DC2626",
+          900: "#7F1D1D",
           700: "#B91C1C",
+          600: "#DC2626",
+          500: "#EF4444",
+          400: "#F87171",
+          100: "#FEE2E2",
         },
+
+        // === Accent (Gelb/Orange) ===
         accent: {
-          500: "#FBBF24", // Gold
           600: "#F59E0B",
+          500: "#FBBF24",
         },
-        surface: "#fff",
 
+        // === Surface ===
+        surface: "#ffffff",
 
+        // === Dark Mode Aliases ===
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+        muted: 'var(--color-muted)',
+        'muted-foreground': 'var(--color-muted-foreground)',
+        border: 'var(--color-border)',
+        ring: 'var(--color-ring)',
       },
 
       maxWidth: {
@@ -39,17 +53,3 @@ export default {
   },
   plugins: []
 }
-
-
-
-
-
-
-// primary: {
-//   500: "#2DD4BF",
-//   600: "#14B8A6",
-//   700: "#0F766E",
-// },
-// secondary: "#99F6E4",
-// surface: "#F0FDFA",
-

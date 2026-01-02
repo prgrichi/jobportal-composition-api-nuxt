@@ -39,14 +39,14 @@
     <div v-if="!jobStore.isLoading && jobStore.hasMore" class="mt-8 text-center">
       <button :disabled="jobStore.isLoadingMore" @click="loadMore" class="btn btn-primary">
         <span v-if="jobStore.isLoadingMore"
-          class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+          class="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent"></span>
         <span>{{ loadMoreLabel }}</span>
       </button>
     </div>
 
     <!-- Alle geladen -->
     <div v-if="!jobStore.hasMore && jobStore.jobs.length > 0 && jobStore.filteredJobs.length !== 0"
-      class="mt-8 text-center text-gray-500">
+      class="mt-8 text-center text-neutral-500">
       {{ $t('jobs.allLoaded', { count: jobStore.jobs.length }) }}
     </div>
 

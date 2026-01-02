@@ -2,10 +2,10 @@
   <div class="max-w-app mx-auto py-4 space-y-6">
 
     <!-- Filter -->
-    <section class="rounded-xl border border-gray-200 bg-white p-4 sm:p-6">
+    <section class="rounded-xl border border-border bg-background p-4 sm:p-6">
       <div class="flex items-center gap-2">
         <Icon name="AdjustmentsVertical" icon-class="h-4 w-4 text-black mb-4" />
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+        <h3 class="text-lg font-semibold text-foreground mb-4">
           {{ $t('jobs.filter.headline') }}
         </h3>
       </div>
@@ -13,7 +13,7 @@
       <div class="flex flex-col sm:flex-row gap-3 filter-group items-center">
         <label class="sr-only" for="search">Suche</label>
         <input id="search" v-model="localSearchText" type="text" :placeholder="$t('jobs.filter.inputPlaceholder')"
-          class="filter-input w-full rounded-xl border border-gray-300 px-4 py-2 text-sm
+          class="filter-input w-full rounded-xl border border-border px-4 py-2 text-sm
              focus:outline-none focus:ring-2 focus:ring-primary-500/40" />
       </div>
 
@@ -21,9 +21,9 @@
         <!-- Location Select -->
         <div class="filter-select">
           <label class="sr-only" for="location">Standort</label>
-          <select id="location" v-model="jobStore.selectedLocation" class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm
+          <select id="location" v-model="jobStore.selectedLocation" class="w-full rounded-xl border border-border px-4 py-2 text-sm
                    focus:outline-none focus:ring-2 focus:ring-primary-500/40
-                   bg-white cursor-pointer">
+                   bg-background cursor-pointer">
             <option value="">Alle Standorte</option>
             <option v-for="location in jobStore.availableLocations" :key="location" :value="location">
               {{ location }}
@@ -34,9 +34,9 @@
         <!-- level Select -->
         <div class="filter-select">
           <label class="sr-only" for="level">Level</label>
-          <select id="level" v-model="jobStore.selectedLevel" class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm
+          <select id="level" v-model="jobStore.selectedLevel" class="w-full rounded-xl border border-border px-4 py-2 text-sm
                    focus:outline-none focus:ring-2 focus:ring-primary-500/40
-                   bg-white cursor-pointer">
+                   bg-background cursor-pointer">
             <option value="">Alle Level</option>
             <option v-for="level in jobStore.availableLevels" :key="level" :value="level">
               {{ level }}
@@ -44,8 +44,8 @@
           </select>
         </div>
 
-        <button v-if="hasActiveFilters" @click="resetAll" class="cursor-pointer px-4 py-2 text-sm text-gray-600 hover:text-gray-900 
-                   border border-gray-300 rounded-xl hover:bg-gray-50">
+        <button v-if="hasActiveFilters" @click="resetAll" class="cursor-pointer px-4 py-2 text-sm text-muted-foreground hover:text-foreground 
+                   border border-border rounded-xl hover:bg-muted">
           {{ $t('jobs.filter.btn.reset') }}
         </button>
       </div>

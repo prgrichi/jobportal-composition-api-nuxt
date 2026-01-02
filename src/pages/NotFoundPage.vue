@@ -3,11 +3,11 @@
     <div class="text-center max-w-md">
       <p class="text-6xl font-bold text-primary-500">404</p>
 
-      <h1 class="mt-4 text-2xl font-semibold text-gray-900">
+      <h1 class="mt-4 text-2xl font-semibold text-foreground">
         Seite nicht gefunden
       </h1>
 
-      <p class="mt-2 text-sm text-gray-600">
+      <p class="mt-2 text-sm text-muted-foreground">
         Die Seite, die du suchst, existiert nicht oder wurde verschoben.
       </p>
 

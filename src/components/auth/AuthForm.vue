@@ -2,10 +2,10 @@
   <div class="mt-4 md:mt-6">
     <Form @submit="onSubmit" :validation-schema="schema" class="max-w-md mx-auto rounded-lg">
       <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-neutral-700 mb-1">{{ $t('auth.general.email')
+        <label for="email" class="block text-sm font-medium text-muted-foreground mb-1">{{ $t('auth.general.email')
           }}</label>
         <Field as="input" name="email" type="email" id="email"
-          class="w-full border bg-white border-neutral-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           :placeholder="$t('auth.general.placeholder.email')">
         </Field>
         <ErrorMessage name="email" v-slot="{ message }">
@@ -14,10 +14,10 @@
       </div>
 
       <div class="mb-6">
-        <label for="password" class="block text-sm font-medium text-neutral-700 mb-1">{{ $t('auth.general.password')
+        <label for="password" class="block text-sm font-medium text-muted-foreground mb-1">{{ $t('auth.general.password')
           }}</label>
         <Field as="input" name="password" type="password" id="password"
-          class="w-full border bg-white border-neutral-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           :placeholder="$t('auth.general.placeholder.password')">
         </Field>
         <ErrorMessage name="password" v-slot="{ message }">
@@ -26,10 +26,10 @@
       </div>
 
       <div v-if="mode === 'register'" class="mb-6">
-        <label for="confirmPassword" class="block text-sm font-medium text-neutral-700 mb-1">{{
+        <label for="confirmPassword" class="block text-sm font-medium text-muted-foreground mb-1">{{
           $t('auth.general.confirmPassword') }}</label>
         <Field as="input" name="confirmPassword" type="password" id="confirmPassword"
-          class="w-full border bg-white border-neutral-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           :placeholder="$t('auth.general.placeholder.confirmPassword')">
         </Field>
         <ErrorMessage name="confirmPassword" v-slot="{ message }">
@@ -39,7 +39,7 @@
 
       <button type="submit" :disabled="isLoading" class="btn btn-primary w-full">
         <span v-if="isLoading"
-          class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+          class="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent"></span>
         <span>{{ submitLabel }}</span>
       </button>
     </Form>

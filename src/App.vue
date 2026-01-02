@@ -20,6 +20,7 @@ import AuthRequiredModal from '@/components/modal/AuthRequiredModal.vue';
 import { useAuthStore } from '@/stores/auth/auth';
 import { useFavoritesStore } from '@/stores/jobs/favorites';
 import { useModalStore } from '@/stores/ui/modal';
+import { useThemeStore } from './stores/ui/theme';
 
 export default {
   name: 'App',
@@ -39,6 +40,9 @@ export default {
     modalStore() {
       return useModalStore();
     },
+    themeStore() {
+      return useThemeStore();
+    }
   },
   watch: {
     'authStore.isAuthenticated': {
@@ -55,6 +59,8 @@ export default {
     }
   },
   async mounted() {
+    this.themeStore.init();
+
     await this.authStore.init();
 
     if (this.authStore.isAuthenticated) {

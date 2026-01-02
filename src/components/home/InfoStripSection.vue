@@ -1,7 +1,7 @@
 <template>
-  <section class="bg-primary-50 border-y border-primary-100">
+  <section class="bg-primary-50 border-y border-neutral-200">
     <div class="max-w-app mx-auto px-4 py-20 text-center">
-      <p class="mx-auto max-w-3xl text-base sm:text-lg text-primary-900/80 leading-relaxed">
+      <p class="mx-auto max-w-3xl text-base sm:text-lg text-foreground/80 leading-relaxed">
         {{ $t('disclaimer.text') }}
         <strong>{{ $t('disclaimer.projectType') }}</strong>.
         {{ $t('disclaimer.demonstrates') }}

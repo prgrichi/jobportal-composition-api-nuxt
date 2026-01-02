@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-surface relative overflow-hidden">
+  <section class="bg-background relative overflow-hidden">
     <div class="mx-auto max-w-app px-4 py-16 md:py-24">
 
       <div class="max-w-2xl">
@@ -7,11 +7,11 @@
           {{ $t('hero.subtitle') }}
         </p>
 
-        <h1 class="text-balance text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
+        <h1 class="text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
           {{ $t('hero.title') }}
         </h1>
 
-        <p class="text-balance mt-5 text-base text-neutral-600 leading-relaxed">
+        <p class="text-balance mt-5 text-base text-muted-foreground leading-relaxed">
           {{ $t('hero.description') }}
         </p>
 

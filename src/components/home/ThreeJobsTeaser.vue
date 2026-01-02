@@ -1,11 +1,11 @@
 <template>
-  <section class="bg-surface pt-5 pb-10 md:pt-10 md:pb-20">
+  <section class="bg-background pt-5 pb-10 md:pt-10 md:pb-20">
     <div class="mx-auto max-w-app px-4">
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
-          <h2 class="text-lg font-semibold text-neutral-900">
+          <h2 class="text-lg font-semibold text-foreground">
             {{ $t('threejobsteaser.title') }}</h2>
-          <p class="mt-1 text-sm text-neutral-600">
+          <p class="mt-1 text-sm text-muted-foreground">
             {{ $t('threejobsteaser.subtitle') }}</p>
         </div>
         <RouterLink :to="{ name: 'jobs' }" class="">
@@ -38,7 +38,7 @@
       <!-- Mobile CTA -->
       <div class="mt-6 md:hidden">
         <RouterLink :to="{ name: 'jobs' }" class="inline-flex w-full items-center justify-center rounded-xl
-                           border-b-3 border-primary-500/30 bg-white px-4 py-3
+                           border-b-3 border-primary-500/30 bg-background px-4 py-3
                            text-sm font-medium text-primary-600
                            transition hover:bg-primary-500/10
                            focus:outline-none focus:ring-2 focus:ring-primary-500/30">

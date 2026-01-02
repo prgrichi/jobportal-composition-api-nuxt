@@ -9,7 +9,9 @@ import {
   StarIcon,
   LockClosedIcon,
   Bars3Icon,
-  XMarkIcon
+  XMarkIcon,
+  SunIcon,
+  MoonIcon
 } from '@heroicons/vue/24/outline';
 
 import {
@@ -23,7 +25,9 @@ const ICONS = {
     Star: StarIcon,
     LockClosed: LockClosedIcon,
     Bars3: Bars3Icon,
-    XMark: XMarkIcon
+    XMark: XMarkIcon,
+    Sun: SunIcon,
+    Moon: MoonIcon
   },
   solid: {
     Star: StarIconSolid,

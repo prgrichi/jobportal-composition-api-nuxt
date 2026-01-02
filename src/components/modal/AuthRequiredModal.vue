@@ -16,13 +16,13 @@
           enter-to="opacity-100 scale-100" leave="ease-in duration-200" leave-from="opacity-100 scale-100"
           leave-to="opacity-0 scale-95">
 
-          <DialogPanel class="bg-white rounded-lg p-6 max-w-md w-full">
+          <DialogPanel class="bg-background rounded-lg p-6 max-w-md w-full">
 
             <DialogTitle class="text-xl font-bold mb-4">
               Anmeldung erforderlich
             </DialogTitle>
 
-            <DialogDescription class="text-gray-600 mb-6">
+            <DialogDescription class="text-muted-foreground mb-6">
               Melde dich an, um alle Funktionen zu nutzen.
             </DialogDescription>
 

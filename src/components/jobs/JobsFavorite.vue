@@ -3,7 +3,7 @@
     <div class="max-w-app mx-auto px-4">
       <!-- Header -->
       <div class="mb-8" v-if="favoritesFoundCount !== 0">
-        <h1 class="text-2xl font-bold text-neutral-900 mb-2">
+        <h1 class="text-2xl font-bold text-foreground mb-2">
           {{ $t('jobs.favorites.title') }}
         </h1>
         <p>{{ $t('jobs.favorites.count', favoritesFoundCount) }}</p>
@@ -16,11 +16,11 @@
 
       <!-- Empty State -->
       <div v-else-if="favoritesFoundCount === 0" class="text-center py-12">
-        <Icon name="Star" type="outline" icon-class="h-16 w-16 text-gray-300 mx-auto mb-4" />
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">
+        <Icon name="Star" type="outline" icon-class="h-16 w-16 bg-neutral-300 mx-auto mb-4" />
+        <h3 class="text-lg font-semibold text-foreground mb-2">
           {{ $t('jobs.favorites.noFavoritesTitle') }}
         </h3>
-        <p class="text-gray-600 mb-6">
+        <p class="text-muted-foreground mb-6">
           {{ $t('jobs.favorites.noFavoritesText') }}
         </p>
         <RouterLink :to="{ name: 'jobs' }" class="btn btn-primary">

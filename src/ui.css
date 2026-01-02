@@ -1,6 +1,6 @@
 @layer components {
   .app-shell {
-    @apply min-h-screen bg-surface text-neutral-900;
+    @apply min-h-screen bg-background text-foreground;
   }
 
   .container {
@@ -40,7 +40,7 @@
   /* //////////////////// */
 
   .btn {
-    @apply cursor-pointer inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none;
+    @apply cursor-pointer inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition duration-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none;
   }
 
   /* Varianten: nicht "@apply btn ..." sondern Utilities wiederholen */
@@ -49,7 +49,7 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 border border-gray-300 bg-white text-gray-900 hover:bg-gray-100;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary-500/40 border border-border bg-background text-foreground hover:bg-muted;
   }
 
 }

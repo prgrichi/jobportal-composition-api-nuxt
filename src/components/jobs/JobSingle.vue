@@ -1,5 +1,5 @@
 <template>
-  <article class="w-full relative overflow-hidden rounded-lg border border-neutral-200 bg-white p-6 transition-all duration-300 hover:shadow-sm
+  <article class="w-full relative overflow-hidden rounded-lg border border-border bg-background p-6 transition-all duration-300 hover:shadow-sm
                   flex flex-col">
 
     <div class="flex flex-col flex-1">
@@ -14,15 +14,15 @@
           </div>
 
           <RouterLink :to="`/jobs/${job.id}`" class="flex w-full">
-            <h3 class="text-lg font-semibold text-neutral-900 transition-colors">
+            <h3 class="text-lg font-semibold text-foreground transition-colors">
               {{ job.title }}
             </h3>
           </RouterLink>
 
           <div class="mt-2 flex items-center gap-2 text-sm">
-            <span class="font-medium text-neutral-800">{{ job.company }}</span>
+            <span class="font-medium text-foreground">{{ job.company }}</span>
             <span class="h-1 w-1 rounded-full bg-neutral-300"></span>
-            <span class="text-neutral-600">{{ job.location }}</span>
+            <span class="text-muted-foreground">{{ job.location }}</span>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <!-- Tags -->
       <div v-if="job.tags?.length" class="flex flex-wrap gap-2"> <!-- ← mt-4 entfernt -->
         <span v-for="tag in job.tags.slice(0, 6)" :key="tag"
-          class="rounded-md bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 transition-colors">
+          class="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors">
           {{ tag }}
         </span>
       </div>

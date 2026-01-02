@@ -3,21 +3,21 @@
     <div class="max-w-app mx-auto px-4">
 
       <div class="mb-8">
-        <h1 class="text-2xl font-bold text-neutral-900 mb-2">
+        <h1 class="text-2xl font-bold text-foreground mb-2">
           {{ $t('profile.title') }}
         </h1>
         <p>{{ $t('profile.subtitle') }}</p>
       </div>
 
       <div v-if="loading" class="text-center py-20">
-        <p class="text-gray-600">{{ $t('general.loading') }}</p>
+        <p class="text-muted-foreground">{{ $t('general.loading') }}</p>
       </div>
 
-      <div v-else class="bg-white rounded-lg shadow p-6">
+      <div v-else class="bg-background rounded-lg shadow p-6">
         <div class="flex items-center gap-4 mb-6">
           <div>
             <h1 class="text-2xl font-bold">{{ displayName }}</h1>
-            <p v-if="profile.jobTitle" class="text-gray-600">{{ profile.jobTitle }}</p>
+            <p v-if="profile.jobTitle" class="text-muted-foreground">{{ profile.jobTitle }}</p>
           </div>
         </div>
         <div v-if="!isEditing">
@@ -32,47 +32,47 @@
           </div>
         </div>
 
-        <div v-else class="bg-white rounded-lg shadow p-6">
+        <div v-else class="bg-background rounded-lg shadow p-6">
           <h2 class="text-xl font-semibold mb-6">{{ $t('profile.editProfile') }}</h2>
           <div class="space-y-4">
 
             <!-- Vorname -->
             <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="firstName" class="block text-sm font-medium text-muted-foreground mb-1">
                 Vorname
               </label>
               <input id="firstName" v-model="editData.firstName" type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Max" />
             </div>
 
             <!-- Nachname -->
             <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="lastName" class="block text-sm font-medium text-muted-foreground mb-1">
                 Nachname
               </label>
               <input id="lastName" v-model="editData.lastName" type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Mustermann" />
             </div>
 
             <!-- Job-Titel -->
             <div>
-              <label for="jobTitle" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="jobTitle" class="block text-sm font-medium text-muted-foreground mb-1">
                 Job-Titel
               </label>
               <input id="jobTitle" v-model="editData.jobTitle" type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="z.B. Senior Developer" />
             </div>
 
             <!-- Standort -->
             <div>
-              <label for="location" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="location" class="block text-sm font-medium text-muted-foreground mb-1">
                 Standort
               </label>
               <input id="location" v-model="editData.location" type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus: outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 border border-border rounded-md focus: outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="z.B. München" />
             </div>
 
@@ -81,7 +81,7 @@
           <div class="flex gap-3 mt-6">
             <button @click="save" :disabled="isSaving" class="btn btn-primary">
               <span v-if="isSaving"
-                class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                class="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent"></span>
               <span>{{ isSavingLabel }}</span>
             </button>
             <button @click="cancel" class="btn btn-secondary">

@@ -1,8 +1,8 @@
 <template>
   <div class="flex">
-    <span class="w-32 text-gray-600">{{ label }}:</span>
+    <span class="w-32 text-muted-foreground">{{ label }}:</span>
     <span v-if="value">{{ value }}</span>
-    <span v-else class="italic text-gray-400">{{ $t('profile.emptyField') }}</span>
+    <span v-else class="italic text-neutral-400">{{ $t('profile.emptyField') }}</span>
   </div>
 </template>
 
