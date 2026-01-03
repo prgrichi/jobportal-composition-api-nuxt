@@ -10,8 +10,9 @@
           {{ $t('auth.general.email') }}
         </label>
         <Field as="input" name="email" type="email" id="email"
+        autocomplete="email"
           class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          :placeholder="$t('auth.general. placeholder.email')" />
+          :placeholder="$t('auth.general.placeholder.email')" />
         <ErrorMessage name="email" v-slot="{ message }">
           <small class="text-red-500">{{ message }}</small>
         </ErrorMessage>
@@ -22,7 +23,7 @@
         <label for="password" class="block text-sm font-medium text-muted-foreground mb-1">
           {{ $t('auth.general.password') }}
         </label>
-        <Field as="input" name="password" type="password" id="password"
+        <Field as="input" name="password" type="password" id="password" :autocomplete="passwordAutocomplete"
           class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           :placeholder="$t('auth.general.placeholder.password')" />
         <ErrorMessage name="password" v-slot="{ message }">
@@ -33,9 +34,9 @@
       <!-- Confirm Password Field (nur bei Register) -->
       <div v-if="mode === 'register'" class="mb-6">
         <label for="confirmPassword" class="block text-sm font-medium text-muted-foreground mb-1">
-          {{ $t('auth.general. confirmPassword') }}
+          {{ $t('auth.general.confirmPassword') }}
         </label>
-        <Field as="input" name="confirmPassword" type="password" id="confirmPassword"
+        <Field as="input" name="confirmPassword" type="password" id="confirmPassword" autocomplete="new-password"
           class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           :placeholder="$t('auth.general.placeholder.confirmPassword')" />
         <ErrorMessage name="confirmPassword" v-slot="{ message }">
@@ -115,11 +116,12 @@ export default {
     authStore() {
       return useAuthStore();
     },
-
     toast() {
       return useToastStore();
     },
-
+    passwordAutocomplete() {
+      return this.mode === 'register' ? 'new-password' : 'current-password';
+    },
     // Dynamic Submit Button Label
     submitLabel() {
       if (this.mode === 'register') {
