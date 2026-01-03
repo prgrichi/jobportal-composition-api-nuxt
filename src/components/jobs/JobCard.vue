@@ -56,7 +56,7 @@
           <!-- Star Icon (solid if favorited, outline if not) -->
           <Icon name="Star" :type="starType" :icon-class="starIconClass" />
           <span class="text-sm text-primary-500 transition-all duration-150 
-                   group-hover/star: underline group-hover/star: underline-offset-4">
+                   group-hover/star:underline group-hover/star:underline-offset-4">
             Merken
           </span>
         </button>

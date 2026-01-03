@@ -29,7 +29,7 @@
 
             <!-- Language Switcher -->
             <div class="flex items-center gap-2" aria-label="Sprachwahl">
-              <button :Class="deClasses" @click="changeLang('de')" class="cursor-pointer text-white">
+              <button :class="deClasses" @click="changeLang('de')" class="cursor-pointer text-white">
                 DE
               </button>
               <span class="text-neutral-300" aria-hidden="true">|</span>
@@ -54,7 +54,7 @@
         </RouterLink>
 
         <!-- Mobile Menu Toggle Button -->
-        <button v-if="authReady" @click="toggleMenu" class="md: hidden p-2 text-muted-foreground">
+        <button v-if="authReady" @click="toggleMenu" class="md:hidden p-2 text-muted-foreground">
           <Icon :name="mobileMenuOpen ? 'XMark' : 'Bars3'" icon-class="h-6 w-6" />
         </button>
 
@@ -193,7 +193,11 @@ export default {
         : 'text-muted-foreground';
     }
   },
-
+  watch: {
+    $route() {
+      this.mobileMenuOpen = false;
+    }
+  },
   methods: {
     // Toggle dark mode
     toggleDarkMode() {

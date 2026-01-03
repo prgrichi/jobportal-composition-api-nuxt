@@ -56,7 +56,7 @@
 <script>
 import { useJobStore } from '@/stores/jobs/jobs';
 import { useI18n } from 'vue-i18n';
-import JobCard from './JobCard. vue';
+import JobCard from './JobCard.vue';
 import JobCardSkeleton from './JobCardSkeleton.vue';
 
 export default {
