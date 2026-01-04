@@ -8,18 +8,11 @@
         <div class="flex h-10 items-center justify-between gap-4 text-xs">
 
           <!-- Dark Mode Toggle -->
-          <div>
-            <button @click="toggleDarkMode"
-              class="cursor-pointer relative inline-flex items-center justify-center p-2 rounded-lg"
-              :aria-label="themeStore.isDark ? 'Switch to light mode' : 'Switch to dark mode'">
-              <Icon name="Sun" v-if="themeStore.isDark" icon-class="h-4 w-4 text-white" />
-              <Icon name="Moon" v-else icon-class="h-4 w-4 text-white" />
-            </button>
-          </div>
+          <ToggleSwitch v-model="darkMode" label="Dark Mode" />
 
           <div class="flex flex-1 justify-end items-center gap-4">
 
-            <!-- Welcome User (nur wenn eingeloggt) -->
+            <!-- Welcome User -->
             <div v-if="authReady && authStore.isAuthenticated" class="flex items-center gap-2">
               <Icon name="User" icon-class="h-4 w-4 text-white" />
               <p class="text-white transition after:content-['/'] after:ml-4">
@@ -140,13 +133,17 @@ import { useFavoritesStore } from '@/stores/jobs/favorites';
 import { useModalStore } from '@/stores/ui/modal';
 import { useThemeStore } from '@/stores/ui/theme';
 import { useLocaleStore } from '@/stores/ui/locale';
+import ToggleSwitch from '@/components/ui/ToggleSwitch.vue';
 
 export default {
   name: 'TheHeader',
-
+  components: {
+    ToggleSwitch
+  },
   data() {
     return {
-      mobileMenuOpen: false  // Mobile menu toggle state
+      mobileMenuOpen: false,  // Mobile menu toggle state
+      darkMode: false,
     };
   },
 
@@ -171,6 +168,14 @@ export default {
     },
     localeStore() {
       return useLocaleStore();
+    },
+    darkMode: {
+      get() {
+        return this.themeStore.isDark;
+      },
+      set(value) {
+        this.themeStore.toggle();
+      }
     },
 
     // Current i18n locale
