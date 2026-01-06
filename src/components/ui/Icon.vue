@@ -15,6 +15,8 @@ import {
   SunIcon,
   MoonIcon,
   CheckIcon,
+  EyeIcon,
+  EyeSlashIcon
 } from '@heroicons/vue/24/outline';
 
 // Heroicons Solid
@@ -34,6 +36,8 @@ const ICONS = {
     Sun: SunIcon,
     Moon: MoonIcon,
     Check: CheckIcon,
+    Eye: EyeIcon,
+    EyeSlash: EyeSlashIcon,
   },
   solid: {
     Star: StarIconSolid,

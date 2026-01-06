@@ -22,9 +22,15 @@
         <label for="password" class="block text-sm font-medium text-muted-foreground mb-1">
           {{ $t('auth.general.password') }}
         </label>
-        <Field as="input" name="password" type="password" id="password" :autocomplete="passwordAutocomplete"
-          class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          :placeholder="$t('auth.general.placeholder.password')" />
+        <div class="relative">
+          <Field as="input" :type="toggleInputType" name="password" id="password" :autocomplete="passwordAutocomplete"
+            class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            :placeholder="$t('auth.general.placeholder.password')" />
+          <button type="button" @click="togglePassword" class="h-full cursor-pointer absolute p-2 right-1 top-0"
+            :aria-label="$t('auth.general.showPassword')">
+            <Icon :name="showPassword ? 'EyeSlash' : 'Eye'" icon-class="h-5 w-5" />
+          </button>
+        </div>
         <ErrorMessage name="password" v-slot="{ message }">
           <small class="text-red-500">{{ message }}</small>
         </ErrorMessage>
@@ -35,9 +41,16 @@
         <label for="confirmPassword" class="block text-sm font-medium text-muted-foreground mb-1">
           {{ $t('auth.general.confirmPassword') }}
         </label>
-        <Field as="input" name="confirmPassword" type="password" id="confirmPassword" autocomplete="new-password"
-          class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          :placeholder="$t('auth.general.placeholder.confirmPassword')" />
+        <div class="relative">
+          <Field as="input" name="confirmPassword" :type="toggleConfirmInputType" id="confirmPassword"
+            autocomplete="new-password"
+            class="w-full border bg-background border-border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            :placeholder="$t('auth.general.placeholder.confirmPassword')" />
+          <button type="button" @click="toggleConfirmPassword" class="h-full cursor-pointer absolute p-2 right-1 top-0"
+            :aria-label="$t('auth.general.showPassword')">
+            <Icon :name="showConfirmPassword ? 'EyeSlash' : 'Eye'" icon-class="h-5 w-5" />
+          </button>
+        </div>
         <ErrorMessage name="confirmPassword" v-slot="{ message }">
           <small class="text-red-500">{{ message }}</small>
         </ErrorMessage>
@@ -89,6 +102,8 @@ export default {
   data() {
     return {
       isLoading: false,
+      showPassword: false,
+      showConfirmPassword: false
     };
   },
 
@@ -104,6 +119,12 @@ export default {
     },
     schema() {
       return this.mode === 'login' ? createLoginSchema() : createRegisterSchema();
+    },
+    toggleInputType() {
+      return this.showPassword ? 'text' : 'password';
+    },
+    toggleConfirmInputType() {
+      return this.showConfirmPassword ? 'text' : 'password';
     },
     // Dynamic Submit Button Label
     submitLabel() {
@@ -164,6 +185,12 @@ export default {
           this.toast.error(error.message);
         }
       }
+    },
+    togglePassword() {
+      this.showPassword = !this.showPassword;
+    },
+    toggleConfirmPassword() {
+      this.showConfirmPassword = !this.showConfirmPassword;
     }
   },
 }
