@@ -19,12 +19,22 @@ export const createJobApplicationSchema = () => {
       .mixed()
       .required(t('errors.cvRequired'))
       .test('fileSize', t('errors.fileSizeMax', { size: MAX_FILE_SIZE_MB }), (value) => {
-        if (!value || !value[0]) return false;
-        return value[0].size <= MAX_FILE_SIZE;
+        if (!value) return false;
+        const file = value instanceof File ? value : value[0];
+
+        if (!(file instanceof File)) return false;
+
+        console.log('File size check:', file.size, 'Max:', MAX_FILE_SIZE);
+        return file.size <= MAX_FILE_SIZE;
       })
       .test('fileType', t('errors.fileTypeAllowedPdf'), (value) => {
-        if (!value || !value[0]) return false;
-        const extension = value[0].name.split('.').pop().toLowerCase();
+        if (!value) return false;
+        const file = value instanceof File ? value : value[0];
+
+        if (!(file instanceof File)) return false;
+
+        const extension = file.name.split('.').pop().toLowerCase();
+        console.log('File extension check:', extension);
         return ALLOWED_FILE_TYPES.includes(extension);
       })
   });
