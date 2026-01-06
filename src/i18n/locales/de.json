@@ -130,7 +130,8 @@
       "count": "Du hast keine gespeicherten Jobs | Gespeicherte Jobs: {n} | Gespeicherte Jobs: {n}",
       "favoritesLoading": "Lade gespeicherten Jobs...",
       "noFavoritesTitle": "Du hast noch keine gespeicherten Jobs.",
-      "noFavoritesText": "Speichere Jobs, um sie später wiederzufinden."
+      "noFavoritesText": "Speichere Jobs, um sie später wiederzufinden.",
+      "save": "Merken"
     },
     "jobDetail": {
       "ctaText1": "Interessiert?",
@@ -155,6 +156,9 @@
         }
       }
     }
+  },
+  "ally": {
+    "skipToContent": "Zum Hauptinhalt springen"
   },
   "profile": {
     "title": "Profil",

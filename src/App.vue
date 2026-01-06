@@ -1,8 +1,13 @@
 <template>
   <div class="app-shell">
+    <!-- Skip Link -->
+    <a href="#main-content"
+      class="sr-only focus:not-sr-only bg-primary-500 text-white focus:absolute focus:top-4 focus:left-4 focus:z-9999 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg focus:ring-2 focus:ring-ring focus:font-semibold">
+      {{ $t('ally.skipToContent') }}
+    </a>
     <TheHeader />
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <ToastContainer />
       <router-view />
       <AuthRequiredModal :is-open="modalStore.authRequiredModalOpen" @close="modalStore.hideAuthRequired" />
@@ -21,6 +26,7 @@ import { useAuthStore } from '@/stores/auth/auth';
 import { useFavoritesStore } from '@/stores/jobs/favorites';
 import { useModalStore } from '@/stores/ui/modal';
 import { useThemeStore } from './stores/ui/theme';
+import i18n from './i18n/index.js';
 
 export default {
   name: 'App',
