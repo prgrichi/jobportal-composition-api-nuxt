@@ -111,7 +111,7 @@
           <!-- Locked Favorite Jobs (für nicht eingeloggte User) -->
           <template v-else>
             <button
-              @click="modalStore.showAuthRequired"
+              @click="openAuthRequiredModal"
               class="cursor-pointer inline-flex items-center text-muted-foreground hover:text-foreground transition"
             >
               <Icon name="LockClosed" icon-class="me-[2px] h-4 w-4 text-muted-foreground" />
@@ -131,7 +131,7 @@
           <!-- Locked Jobs (für nicht eingeloggte User) -->
           <template v-else>
             <button
-              @click="modalStore.showAuthRequired"
+              @click="openAuthRequiredModal"
               class="cursor-pointer inline-flex items-center text-muted-foreground hover:text-foreground transition"
             >
               <Icon name="LockClosed" icon-class="me-[2px] h-4 w-4 text-muted-foreground" />
@@ -168,149 +168,132 @@
   </header>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
+
 import { useToastStore } from '@/stores/toast/toast';
 import { useAuthStore } from '@/stores/auth/auth';
 import { useFavoritesStore } from '@/stores/jobs/favorites';
 import { useModalStore } from '@/stores/ui/modal';
 import { useThemeStore } from '@/stores/ui/theme';
 import { useLocaleStore } from '@/stores/ui/locale';
-import ToggleSwitch from '@/components/ui/ToggleSwitch.vue';
 import { createFocusTrap } from '@/utils/focusTrap';
 
-export default {
-  name: 'TheHeader',
-  components: {
-    ToggleSwitch,
-  },
-  data() {
-    return {
-      mobileMenuOpen: false, // Mobile menu toggle state
-      focusTrap: null, // Focus trap instance
-    };
-  },
+import ToggleSwitch from '@/components/ui/ToggleSwitch.vue';
+import Icon from '@/components/ui/Icon.vue';
 
-  computed: {
-    authStore() {
-      return useAuthStore();
-    },
-    isAuthenticated() {
-      return this.authStore.isAuthenticated;
-    },
-    authReady() {
-      return this.authStore.authReady;
-    },
-    favoritesStore() {
-      return useFavoritesStore();
-    },
-    modalStore() {
-      return useModalStore();
-    },
-    themeStore() {
-      return useThemeStore();
-    },
-    localeStore() {
-      return useLocaleStore();
-    },
-    darkMode: {
-      get() {
-        return this.themeStore.isDark;
-      },
-      set(_value) {
-        this.themeStore.toggle();
-      },
-    },
+const mobileMenuOpen = ref(false); // Mobile menu toggle state
+const focusTrap = ref(null); // Focus trap instance
+const burgerBtn = ref(null); // Reference to the burger button
+const mobileMenu = ref(null); // Reference to the mobile menu
 
-    // Current i18n locale
-    currentLocale() {
-      return this.$i18n.locale;
-    },
-    currentLangDe() {
-      return this.currentLocale === 'de' ? 'page' : undefined;
-    },
-    currentLangEn() {
-      return this.currentLocale === 'en' ? 'page' : undefined;
-    },
-    // German button classes (active/inactive)
-    deClasses() {
-      return this.currentLocale === 'de' ? 'font-bold text-primary-600' : 'text-muted-foreground';
-    },
-    // English button classes (active/inactive)
-    enClasses() {
-      return this.currentLocale === 'en' ? 'font-bold text-primary-600' : 'text-muted-foreground';
-    },
-  },
-  watch: {
-    $route() {
-      this.mobileMenuOpen = false;
-    },
-  },
+const { locale } = useI18n();
 
-  mounted() {
-    this.focusTrap = createFocusTrap({
-      getFocusableElements: () => {
-        const menuLinks = Array.from(this.$refs.mobileMenu?.querySelectorAll('a, button') || []);
-        return [this.$refs.burgerBtn, ...menuLinks];
-      },
-      onClose: () => {
-        this.toggleMenu();
-      },
+const toastStore = useToastStore();
+const authStore = useAuthStore();
+const favoritesStore = useFavoritesStore();
+const modalStore = useModalStore();
+const themeStore = useThemeStore();
+const localeStore = useLocaleStore();
+const isAuthenticated = computed(() => authStore.isAuthenticated);
+const authReady = computed(() => authStore.authReady);
+
+const darkMode = computed({
+  get() {
+    return themeStore.isDark;
+  },
+  set(_value) {
+    themeStore.toggle();
+  },
+});
+
+// Current i18n locale
+const currentLocale = computed(() => {
+  return localeStore.locale;
+});
+
+const currentLangDe = computed(() => {
+  return currentLocale.value === 'de' ? 'page' : undefined;
+});
+
+const currentLangEn = computed(() => {
+  return currentLocale.value === 'en' ? 'page' : undefined;
+});
+
+// German button classes (active/inactive)
+const deClasses = computed(() => {
+  return currentLocale.value === 'de' ? 'font-bold text-primary-600' : 'text-muted-foreground';
+});
+// English button classes (active/inactive)
+const enClasses = computed(() => {
+  return currentLocale.value === 'en' ? 'font-bold text-primary-600' : 'text-muted-foreground';
+});
+
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => {
+    mobileMenuOpen.value = false;
+  }
+);
+
+onMounted(() => {
+  focusTrap.value = createFocusTrap({
+    getFocusableElements: () => {
+      const menuLinks = Array.from(mobileMenu.value?.querySelectorAll('a, button') || []);
+      return [burgerBtn.value, ...menuLinks];
+    },
+    onClose: () => {
+      toggleMenu();
+    },
+  });
+});
+
+onBeforeUnmount(() => {
+  focusTrap.value?.destroy();
+});
+
+// Toggle mobile menu
+const toggleMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+
+  if (mobileMenuOpen.value) {
+    focusTrap.value?.activate();
+    const firstLink = mobileMenu.value?.querySelector('a');
+    firstLink?.focus();
+  } else {
+    focusTrap.value?.deactivate();
+    nextTick(() => {
+      // Focus zurück auf Burger
+      burgerBtn.value?.focus();
     });
-  },
+  }
+};
 
-  beforeUnmount() {
-    this.focusTrap?.destroy();
-  },
+// Change language
+const changeLang = lang => {
+  locale.value = lang;
+  localeStore.setLocale(lang);
+};
 
-  methods: {
-    // Toggle dark mode
-    toggleDarkMode() {
-      this.themeStore.toggle();
-    },
+// Show auth required modal
+const openAuthRequiredModal = () => {
+  modalStore.showAuthRequired();
+};
 
-    // Toggle mobile menu
-    toggleMenu() {
-      this.mobileMenuOpen = !this.mobileMenuOpen;
-
-      if (this.mobileMenuOpen) {
-        this.focusTrap.activate();
-        const firstLink = this.$refs.mobileMenu?.querySelector('a');
-        firstLink?.focus();
-      } else {
-        this.focusTrap.deactivate();
-        this.$nextTick(() => {
-          // Focus zurück auf Burger
-          this.$refs.burgerBtn?.focus();
-        });
-      }
-    },
-
-    // Change language
-    changeLang(lang) {
-      this.$i18n.locale = lang;
-
-      this.localeStore.setLocale(lang);
-    },
-
-    // Handle user logout
-    async handleLogout() {
-      const toast = useToastStore();
-
-      try {
-        await signOut(auth);
-        toast.success('Erfolgreich ausgeloggt');
-        this.$router.push({ name: 'home' });
-      } catch (_err) {
-        toast.error('Logout fehlgeschlagen');
-      }
-    },
-
-    // Show auth required modal
-    openAuthRequiredModal() {
-      this.modalStore.showAuthRequired();
-    },
-  },
+const router = useRouter();
+// Handle user logout
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    toastStore.success('Erfolgreich ausgeloggt');
+    router.push({ name: 'home' });
+  } catch (_err) {
+    toastStore.error('Logout fehlgeschlagen');
+  }
 };
 </script>
