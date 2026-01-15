@@ -48,3 +48,8 @@ __screenshots__/
 
 prompts.md
 prompts-short.md
+
+# Nuxt dev/build outputs
+.nuxt
+.output
+dist
