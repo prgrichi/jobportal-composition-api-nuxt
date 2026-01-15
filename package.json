@@ -7,9 +7,9 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
     "lint": "eslint .  --fix",
     "format": "prettier --write \"src/**/*.{js,vue,css,json}\"",
     "prepare": "husky"
@@ -26,19 +26,18 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@pinia/nuxt": "^0.11.3",
     "@tailwindcss/vite": "^4.1.18",
     "firebase": "^12.7.0",
     "lodash-es": "^4.17.22",
+    "nuxt": "^4.2.2",
     "pinia": "^3.0.4",
-    "tailwindcss": "^4.1.18",
     "vee-validate": "^4.15.1",
     "vue": "^3.5.25",
     "vue-i18n": "^11.2.7",
-    "vue-router": "^4.6.3",
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.2",
     "@vue/eslint-config-prettier": "^10.2.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
@@ -46,7 +45,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
-    "vite": "^7.2.4",
-    "vite-plugin-vue-devtools": "^8.0.5"
+    "tailwindcss": "^4.1.18"
   }
 }
