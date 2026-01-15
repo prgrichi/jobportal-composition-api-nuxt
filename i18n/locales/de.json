@@ -1,0 +1,260 @@
+{
+  "general": {
+    "btn": {
+      "jobs": "Jobs ansehen",
+      "signInNow": "Jetzt anmelden",
+      "registerNow": "Jetzt registrieren",
+      "signIn": "Anmelden",
+      "register": "Registrieren",
+      "registerAccount": "Konto erstellen",
+      "logout": "Logout",
+      "login": "Login",
+      "github": "Github ansehen",
+      "loadJobs": "Mehr Jobs laden",
+      "apply": "Bewerben",
+      "save": "Speichern",
+      "saved": "Gespeichert",
+      "jobSearch": "Jobs durchsuchen",
+      "edit": "Bearbeiten",
+      "cancel": "Abbrechen",
+      "ui": {
+        "creatingAccount": "Konto wird erstellt...",
+        "createAccount": "Konto erstellen",
+        "signingIn": "Anmelden...",
+        "signIn": "Anmelden",
+        "saving": "Speichern...",
+        "save": "Speichern"
+      }
+    },
+    "loading": "Lädt..."
+  },
+  "nav": {
+    "userGreeting": "Hallo",
+    "switchToGerman": "Wechsel zu Deutsch",
+    "switchToEnglish": "Wechsel zu Englisch",
+    "languageSelector": "Sprachauswahl",
+    "openMobileMenu": "Menü öffnen",
+    "closeMobileMenu": "Menü schließen",
+    "link": {
+      "homepage": "Job Portal",
+      "job": "Job finden",
+      "login": "Login",
+      "register": "Registrieren",
+      "logout": "Logout",
+      "favoriteJobs": "Meine Jobs",
+      "profile": "Profil"
+    }
+  },
+  "footer": {
+    "projectTitle": "Jobportal",
+    "projectSubTitle": "Portfolio-Projekt",
+    "link": {
+      "homepage": "Start",
+      "login": "Login",
+      "jobs": "Jobs"
+    }
+  },
+  "threejobsteaser": {
+    "title": "Neueste Jobs",
+    "subtitle": "Entdecke täglich neue Karrierechancen.",
+    "viewAll": "Alle Jobs",
+    "placeholder": {
+      "locked": "Gesperrt",
+      "text": "Melde dich an, um diesen Job zu sehen"
+    }
+  },
+  "auth": {
+    "general": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "hidePassword": "Passwort verbergen",
+      "showPassword": "Passwort anzeigen",
+      "placeholder": {
+        "email": "Gib deine E-Mail ein",
+        "password": "Passwort eingeben",
+        "confirmPassword": "Passwort bestätigen"
+      }
+    },
+    "login": {
+      "title": "Loginpage",
+      "subTitle": "Melde dich an, um gespeicherte Jobs zu sehen."
+    },
+    "register": {
+      "title": "Registrieren",
+      "subTitle": "Erstelle ein Konto, um Jobs zu speichern."
+    }
+  },
+  "errors": {
+    "emailRequired": "E-Mail ist erforderlich",
+    "emailInvalid": "Ungültige E-Mail-Adresse",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordLength": "Passwort muss mindestens 6 Zeichen lang sein",
+    "logoutError": "Fehler beim Ausloggen. Bitte versuche es erneut.",
+    "loginError": "Fehler beim Einloggen. Bitte überprüfe deine Anmeldedaten.",
+    "registerError": "Fehler bei der Registrierung. Bitte versuche es erneut.",
+    "passwordMismatch": "Passwörter stimmen nicht überein.",
+    "confirmPassword": "Bitte bestätige das Passwort",
+    "invalidCredentials": "Die Zugangsdaten sind ungültig.",
+    "emailAlreadyInUse": "Die E-Mail-Adresse wird bereits verwendet.",
+    "firstNameRequired": "Vorname ist erforderlich",
+    "lastNameRequired": "Nachname ist erforderlich",
+    "cvRequired": "Lebenslauf ist erforderlich",
+    "fileSizeMax": "Datei darf maximal {size}MB groß sein",
+    "fileTypeAllowedPdf": "Nur PDF-Dateien sind erlaubt"
+  },
+  "toast": {
+    "loginSuccess": "Erfolgreich eingeloggt.",
+    "logoutSuccess": "Erfolgreich ausgeloggt.",
+    "registerSuccess": "Konto erfolgreich erstellt.",
+    "profileSuccess": "Profil erfolgreich gespeichert!",
+    "profileError": "Fehler beim Speichern. Bitte versuche es erneut."
+  },
+  "jobs": {
+    "headline": "Verfügbare Jobs",
+    "filter": {
+      "headline": "Filter",
+      "inputPlaceholder": "Job, Firma oder Stichwort...",
+      "jobsFound": "Keine Jobs gefunden | 1 Job gefunden | {n} Jobs gefunden",
+      "allLevels": "Alle Erfahrungsstufen",
+      "allLocations": "Alle Standorte",
+      "searchLabel": "Jobsuche Eingabefeld",
+      "locationLabel": "Jobstandort auswählen",
+      "levelLabel": "Erfahrungsstufe auswählen",
+      "btn": {
+        "reset": "Filter zurücksetzen"
+      }
+    },
+    "jobsNotFound": "Keine Jobs gefunden.",
+    "ui": {
+      "loadMore": "Mehr Jobs laden",
+      "loading": "Laden..."
+    },
+    "allLoaded": "Alle {count} Jobs geladen",
+    "details": "Details",
+    "favorites": {
+      "title": "Meine Jobs",
+      "count": "Du hast keine gespeicherten Jobs | Gespeicherte Jobs: {n} | Gespeicherte Jobs: {n}",
+      "favoritesLoading": "Lade gespeicherten Jobs...",
+      "noFavoritesTitle": "Du hast noch keine gespeicherten Jobs.",
+      "noFavoritesText": "Speichere Jobs, um sie später wiederzufinden.",
+      "save": "Merken",
+      "addToFavoritesLabel": "{title} bei {company} zu Favoriten hinzufügen",
+      "removeFromFavoritesLabel": "{title} bei {company} von Favoriten entfernen"
+    },
+    "jobDetail": {
+      "ctaText1": "Interessiert?",
+      "ctaText2": "Bewerbe dich direkt oder speichere den Job für später.",
+      "backLinkText": "Zurück zu Jobs"
+    },
+    "application": {
+      "general": {
+        "title": "Bewerbung als {jobTitle}",
+        "copy": "Bewirb dich jetzt und werde Teil unseres Teams! Fülle einfach das Formular aus und lade deinen Lebenslauf hoch. Wir melden uns schnellstmöglich bei dir.",
+        "salary": "Gehaltsvorstellung (EUR)",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "fileUpload": "Lebenslauf hochladen (pdf)",
+        "emailFromAccount": "Die E-Mail-Adresse wird aus deinem Konto übernommen.",
+        "placeholder": {
+          "salary": "z.B. 55.000",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "email": "E-Mail"
+        }
+      }
+    }
+  },
+  "ally": {
+    "skipToContent": "Zum Hauptinhalt springen"
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Verwalte deine persönlichen Informationen",
+    "emptyField": "Nicht angegeben",
+    "editProfile": "Profil bearbeiten"
+  },
+  "modal": {
+    "authRequired": {
+      "title": "Anmeldung erforderlich",
+      "message": "Melde dich an, um alle Funktionen zu nutzen."
+    },
+    "close": "Schließen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die Seite, die du suchst, existiert nicht oder wurde verschoben.",
+    "btn": {
+      "home": "Zur Startseite",
+      "back": "Zurück"
+    }
+  },
+  "hero": {
+    "title": "Eine moderne Jobbörse als Portfolio-Projekt",
+    "subtitle": "Jobportal Demo",
+    "description": "Eine reduzierte Jobbörse als Übungs- und Portfolio-Projekt, entwickelt mit Fokus auf Klarheit statt Funktionsfülle."
+  },
+  "why": {
+    "label": "Warum dieses Portal?",
+    "title": "Reduziert auf das Wesentliche",
+    "description": "Dieses Jobportal ist bewusst schlank gehalten: Stellen schnell finden, filtern und speichern – ohne Werbung, Popups oder visuelles Rauschen. Der Fokus liegt auf Struktur, Nutzerführung und klaren Inhalten.",
+    "features": {
+      "relevantJobs": {
+        "title": "Relevante Stellen",
+        "description": "Ausgewählte Jobs aus internen Teams – keine Projektakquise oder Agenturangebote."
+      },
+      "remoteFlexible": {
+        "title": "Remote & flexibel",
+        "description": "Remote- und Hybrid-Optionen sind klar gekennzeichnet."
+      },
+      "noDistraction": {
+        "title": "Ohne Ablenkung",
+        "description": "Keine Werbung, kein Tracking, keine unnötigen Elemente."
+      }
+    }
+  },
+  "disclaimer": {
+    "text": "Dieses Jobportal ist ein",
+    "projectType": "Übungs- und Portfolio-Projekt",
+    "demonstrates": "Es demonstriert den Einsatz moderner Frontend-Technologien wie",
+    "tech": {
+      "vue": "Vue 3",
+      "pinia": "Pinia",
+      "firebase": "Firebase"
+    },
+    "and": "und",
+    "inRealisticApp": "in einer realistischen Anwendung."
+  },
+  "techStack": {
+    "label": "Tech Stack",
+    "title": "Technologien hinter dem Projekt",
+    "description": "Dieses Jobportal ist als praxisnahes Portfolio-Projekt konzipiert. Der Stack fokussiert Wartbarkeit, Struktur und moderne Frontend-Workflows.",
+    "items": {
+      "vue": {
+        "title": "Vue 3",
+        "description": "Komponentenbasierte Architektur für eine klare UI-Struktur."
+      },
+      "pinia": {
+        "title": "Pinia",
+        "description": "Zentrales State Management für Jobs, Nutzer und Favoriten."
+      },
+      "vueRouter": {
+        "title": "Vue Router",
+        "description": "Clientseitiges Routing mit Guards für geschützte Bereiche."
+      },
+      "firebase": {
+        "title": "Firebase",
+        "description": "Authentifizierung und Datenhaltung über Firestore."
+      },
+      "vite": {
+        "title": "Vite",
+        "description": "Schnelles Development-Setup mit moderner Build-Pipeline."
+      },
+      "tailwind": {
+        "title": "Tailwind CSS",
+        "description": "Utility-first Styling für ein konsistentes, responsives UI."
+      }
+    }
+  }
+}
