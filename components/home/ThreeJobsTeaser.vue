@@ -15,14 +15,14 @@
         </div>
 
         <!-- Desktop:  View All Link -->
-        <RouterLink :to="{ name: 'jobs' }" class="hidden md:inline-flex">
+        <NuxtLink :to="{ name: 'jobs' }" class="hidden md:inline-flex">
           <span
             class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary-600 after:transition-all after:duration-300 hover:after:w-full inline-flex items-center gap-1 text-sm font-medium text-primary-500 transition group-hover:text-primary-600"
           >
             {{ $t('threejobsteaser.viewAll') }}
             <span aria-hidden="true">→</span>
           </span>
-        </RouterLink>
+        </NuxtLink>
       </div>
 
       <!-- Jobs Grid -->
@@ -45,12 +45,12 @@
 
       <!-- Mobile:  View All Button -->
       <div class="mt-6 md:hidden">
-        <RouterLink
+        <NuxtLink
           :to="{ name: 'jobs' }"
           class="inline-flex w-full items-center justify-center rounded-xl border border-primary-500 bg-background px-4 py-3 text-sm font-medium text-primary-600 transition hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
         >
           {{ $t('threejobsteaser.viewAll') }}
-        </RouterLink>
+        </NuxtLink>
       </div>
     </div>
   </section>

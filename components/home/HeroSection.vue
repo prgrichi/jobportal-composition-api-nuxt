@@ -21,9 +21,9 @@
 
         <!-- CTA Buttons -->
         <div class="mt-8 flex flex-wrap gap-4">
-          <RouterLink :to="{ name: 'jobs' }" class="btn btn-primary">
+          <NuxtLink :to="{ name: 'jobs' }" class="btn btn-primary">
             {{ $t('general.btn.jobs') }}
-          </RouterLink>
+          </NuxtLink>
 
           <a
             href="https://github.com/prgrichi/jobportal"

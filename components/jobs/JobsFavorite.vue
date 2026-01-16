@@ -31,9 +31,9 @@
         </p>
 
         <!-- CTA:  Browse Jobs -->
-        <RouterLink :to="{ name: 'jobs' }" class="btn btn-primary">
+        <NuxtLink :to="{ name: 'jobs' }" class="btn btn-primary">
           {{ $t('general.btn.jobSearch') }}
-        </RouterLink>
+        </NuxtLink>
       </div>
 
       <!-- Favorites Grid -->

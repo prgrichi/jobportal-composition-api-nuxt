@@ -20,11 +20,11 @@
           </div>
 
           <!-- Job Title (Link to Detail) -->
-          <RouterLink :to="`/jobs/${job.id}`" class="flex w-full">
+          <NuxtLink :to="`/jobs/${job.id}`" class="flex w-full">
             <h3 class="text-lg font-semibold text-foreground transition-colors">
               {{ job.title }}
             </h3>
-          </RouterLink>
+          </NuxtLink>
 
           <!-- Company + Location -->
           <div class="mt-2 flex items-center gap-2 text-sm">

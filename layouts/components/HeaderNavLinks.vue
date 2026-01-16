@@ -1,7 +1,7 @@
 <template>
   <!-- Favorite Jobs Link -->
   <template v-if="isAuthenticated">
-    <RouterLink
+    <NuxtLink
       :to="{ name: 'favoriteJobs' }"
       class="inline-flex items-center text-muted-foreground hover:text-foreground transition"
     >
@@ -13,7 +13,7 @@
       >
         {{ favoriteCount }}
       </span>
-    </RouterLink>
+    </NuxtLink>
   </template>
   <!-- Locked Favorite Jobs (für nicht eingeloggte User) -->
   <template v-else>
@@ -28,12 +28,12 @@
 
   <!-- Jobs Link -->
   <template v-if="isAuthenticated">
-    <RouterLink
+    <NuxtLink
       :to="{ name: 'jobs' }"
       class="inline-flex items-center text-muted-foreground hover:text-foreground transition"
     >
       {{ $t('nav.link.job') }}
-    </RouterLink>
+    </NuxtLink>
   </template>
   <!-- Locked Jobs (für nicht eingeloggte User) -->
   <template v-else>
@@ -47,23 +47,23 @@
   </template>
 
   <!-- Profile Link (nur wenn eingeloggt) -->
-  <RouterLink
+  <NuxtLink
     v-if="isAuthenticated"
     :to="{ name: 'profile' }"
     class="inline-flex items-center text-muted-foreground hover:text-foreground transition"
   >
     {{ $t('nav.link.profile') }}
-  </RouterLink>
+  </NuxtLink>
 
   <!-- Login Button (nur wenn nicht eingeloggt) -->
-  <RouterLink v-if="!isAuthenticated" :to="{ name: 'login' }" class="btn btn-secondary">
+  <NuxtLink v-if="!isAuthenticated" :to="{ name: 'login' }" class="btn btn-secondary">
     {{ $t('general.btn.login') }}
-  </RouterLink>
+  </NuxtLink>
 
   <!-- Register Button (nur wenn nicht eingeloggt) -->
-  <RouterLink v-if="!isAuthenticated" :to="{ name: 'register' }" class="btn btn-primary">
+  <NuxtLink v-if="!isAuthenticated" :to="{ name: 'register' }" class="btn btn-primary">
     {{ $t('general.btn.register') }}
-  </RouterLink>
+  </NuxtLink>
 
   <!-- Logout Button (nur wenn eingeloggt) -->
   <button v-if="isAuthenticated" class="btn btn-secondary" @click="handleLogout">

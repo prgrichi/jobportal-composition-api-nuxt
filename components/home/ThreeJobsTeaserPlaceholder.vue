@@ -34,12 +34,12 @@
 
     <!-- CTA Buttons -->
     <div class="grid justify-center gap-3 md:grid-cols-2">
-      <RouterLink to="/login" class="btn btn-primary">
+      <NuxtLink to="/login" class="btn btn-primary">
         {{ $t('general.btn.signInNow') }}
-      </RouterLink>
-      <RouterLink to="/register" class="btn btn-secondary">
+      </NuxtLink>
+      <NuxtLink to="/register" class="btn btn-secondary">
         {{ $t('general.btn.registerNow') }}
-      </RouterLink>
+      </NuxtLink>
     </div>
   </article>
 </template>
