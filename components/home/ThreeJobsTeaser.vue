@@ -15,7 +15,7 @@
         </div>
 
         <!-- Desktop:  View All Link -->
-        <NuxtLink :to="{ name: 'jobs' }" class="hidden md:inline-flex">
+        <NuxtLink to="/jobs" class="hidden md:inline-flex">
           <span
             class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary-600 after:transition-all after:duration-300 hover:after:w-full inline-flex items-center gap-1 text-sm font-medium text-primary-500 transition group-hover:text-primary-600"
           >
@@ -27,13 +27,15 @@
 
       <!-- Jobs Grid -->
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Loading State:  Skeletons -->
-        <template v-if="!authStore.authReady || jobStore.isLoading">
+        <!-- Loading State: Skeletons -->
+        <template v-if="jobStore.isLoading">
           <JobCardSkeleton v-for="n in 3" :key="`sk-${n}`" />
         </template>
 
         <!-- Jobs List -->
-        <JobCard v-for="job in jobStore.jobs" :key="job.id" :job="job" />
+        <template v-else>
+          <JobCard v-for="job in jobStore.jobs" :key="job.id" :job="job" />
+        </template>
 
         <!-- Error State -->
         <template v-if="jobStore.error">
@@ -46,7 +48,7 @@
       <!-- Mobile:  View All Button -->
       <div class="mt-6 md:hidden">
         <NuxtLink
-          :to="{ name: 'jobs' }"
+          to="/jobs"
           class="inline-flex w-full items-center justify-center rounded-xl border border-primary-500 bg-background px-4 py-3 text-sm font-medium text-primary-600 transition hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
         >
           {{ $t('threejobsteaser.viewAll') }}
@@ -59,12 +61,10 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useJobStore } from '@/stores/jobs/jobs';
-import { useAuthStore } from '@/stores/auth/auth';
 import JobCard from '@/components/jobs/JobCard.vue';
 import JobCardSkeleton from '@/components/jobs/JobCardSkeleton.vue';
 
 const jobStore = useJobStore();
-const authStore = useAuthStore();
 
 onMounted(() => {
   // Load latest 3 jobs

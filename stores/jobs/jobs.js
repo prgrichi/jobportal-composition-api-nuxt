@@ -15,7 +15,7 @@ export const useJobStore = defineStore('jobs', {
   state: () => ({
     jobs: [],
     singleJob: null,
-    isLoading: false,
+    isLoading: true,
     isLoadingMore: false,
     error: null,
     searchText: '',
@@ -155,6 +155,10 @@ export const useJobStore = defineStore('jobs', {
     },
 
     async fetchJobById(jobId) {
+      if (typeof jobId !== 'string') {
+        jobId = String(jobId);
+      }
+
       this.isLoading = true;
       this.error = null;
       this.singleJob = null;
