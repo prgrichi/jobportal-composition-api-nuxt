@@ -28,7 +28,7 @@
       }
     },
     "loading": "Loading...",
-    "required": "Required"
+    "userGreetingName": "User"
   },
   "nav": {
     "userGreeting": "Hello",
