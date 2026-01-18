@@ -68,7 +68,6 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
 
 import {
   TransitionRoot,
@@ -108,11 +107,5 @@ const sizeClass = computed(() => {
 
 const onClose = () => {
   emit('close');
-};
-
-const router = useRouter();
-const goToLogin = () => {
-  emit('close');
-  router.push('/login');
 };
 </script>

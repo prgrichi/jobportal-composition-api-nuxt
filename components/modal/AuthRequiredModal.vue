@@ -22,7 +22,6 @@
 
 <script setup>
 import BaseModal from './BaseModal.vue';
-import { useRouter } from 'vue-router';
 
 defineProps({
   isOpen: {
@@ -37,9 +36,8 @@ const onClose = () => {
   emit('close');
 };
 
-const router = useRouter();
 const goToLogin = () => {
   emit('close');
-  router.push('/login');
+  navigateTo('/login');
 };
 </script>

@@ -31,7 +31,7 @@
         </p>
 
         <!-- CTA:  Browse Jobs -->
-        <NuxtLink :to="{ name: 'jobs' }" class="btn btn-primary">
+        <NuxtLink to="/jobs" class="btn btn-primary">
           {{ $t('general.btn.jobSearch') }}
         </NuxtLink>
       </div>

@@ -2,27 +2,33 @@
   <div class="mx-auto max-w-app flex justify-between md:block">
     <div class="flex h-16 items-center w-full justify-between relative px-4">
       <!-- Logo / Home Link -->
-      <RouterLink :to="{ name: 'home' }" class="text-sm font-semibold text-foreground">
+      <NuxtLink to="/" class="text-sm font-semibold text-foreground">
         {{ $t('nav.link.homepage') }}
-      </RouterLink>
+      </NuxtLink>
 
-      <!-- Mobile Menu Toggle Button -->
-      <button
-        v-if="authReady"
-        @click="toggleMenu"
-        ref="burgerBtn"
-        :aria-expanded="mobileMenuOpen"
-        aria-controls="mobile-menu"
-        class="md:hidden min-w-11 min-h-11 p-2 text-muted-foreground"
-      >
-        <span class="sr-only">
-          {{ mobileMenuOpen ? $t('nav.closeMobileMenu') : $t('nav.openMobileMenu') }}
-        </span>
-        <Icon aria-hidden="true" :name="mobileMenuOpen ? 'XMark' : 'Bars3'" icon-class="h-6 w-6" />
-      </button>
+      <p>
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          v-show="authReady"
+          @click="toggleMenu"
+          ref="burgerBtn"
+          :aria-expanded="mobileMenuOpen"
+          aria-controls="mobile-menu"
+          class="md:hidden min-w-11 min-h-11 p-2 text-muted-foreground"
+        >
+          <span class="sr-only">
+            {{ mobileMenuOpen ? $t('nav.closeMobileMenu') : $t('nav.openMobileMenu') }}
+          </span>
+          <Icon
+            aria-hidden="true"
+            :name="mobileMenuOpen ? 'XMark' : 'Bars3'"
+            icon-class="h-6 w-6"
+          />
+        </button>
+      </p>
 
       <nav
-        v-if="authReady"
+        v-show="authReady"
         ref="mobileMenu"
         id="mobile-menu"
         aria-label="Hauptnavigation"
@@ -47,7 +53,6 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { signOut } from 'firebase/auth';
 
 import { useToastStore } from '@/stores/toast/toast';
@@ -83,6 +88,7 @@ watch(
 
 // Toggle mobile menu
 const toggleMenu = () => {
+  if (!mobileMenu.value) return; // Safety-Check
   mobileMenuOpen.value = !mobileMenuOpen.value;
 
   if (mobileMenuOpen.value) {

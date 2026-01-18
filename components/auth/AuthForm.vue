@@ -113,7 +113,6 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useI18n } from 'vue-i18n';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -121,6 +120,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { useToastStore } from '@/stores/toast/toast';
 import { useAuthStore } from '@/stores/auth/auth';
 import { createLoginSchema, createRegisterSchema } from '@/schemas';
+import { navigateTo } from 'nuxt/app';
 
 const { $firebaseAuth } = useNuxtApp();
 const auth = $firebaseAuth;
@@ -145,10 +145,6 @@ const showConfirmPassword = ref(false);
 // Stores
 const authStore = useAuthStore();
 const toast = useToastStore();
-
-// Router
-const router = useRouter();
-const route = useRoute();
 
 // Computeds
 const passwordAutocomplete = computed(() =>
@@ -194,7 +190,7 @@ const onSubmit = async values => {
       );
       await authStore.createUserDocument(userCredential.user);
       toast.success(t('toast.registerSuccess'));
-      await router.push({ name: 'home' });
+      await navigateTo('/');
     } else {
       // Login Mode
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
@@ -202,8 +198,9 @@ const onSubmit = async values => {
       toast.success(t('toast.loginSuccess'));
 
       // Redirect to previous page or home
-      const redirectPath = route.query.redirect || '/';
-      await router.push(redirectPath);
+      // const redirectPath = route.query.redirect || '/';
+      // await router.push(redirectPath);
+      await navigateTo('/');
     }
   } catch (error) {
     // Handle Firebase Auth Errors

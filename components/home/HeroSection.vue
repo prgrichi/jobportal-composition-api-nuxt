@@ -21,7 +21,7 @@
 
         <!-- CTA Buttons -->
         <div class="mt-8 flex flex-wrap gap-4">
-          <NuxtLink :to="{ name: 'jobs' }" class="btn btn-primary">
+          <NuxtLink to="/jobs" class="btn btn-primary">
             {{ $t('general.btn.jobs') }}
           </NuxtLink>
 

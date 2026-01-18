@@ -12,31 +12,25 @@
         </div>
 
         <!-- Navigation Links -->
-        <nav v-if="authReady" class="flex gap-6 text-sm">
+        <nav class="flex gap-6 text-sm">
           <!-- Home Link -->
-          <RouterLink
-            :to="{ name: 'home' }"
-            class="text-muted-foreground hover:text-primary-600 transition"
-          >
+          <NuxtLink to="/" class="text-muted-foreground hover:text-primary-600 transition">
             {{ $t('footer.link.homepage') }}
-          </RouterLink>
+          </NuxtLink>
 
           <!-- Login Link (nur für nicht eingeloggte User) -->
-          <RouterLink
-            v-if="!isAuthenticated"
-            :to="{ name: 'login' }"
+          <NuxtLink
+            v-show="authReady && !isAuthenticated"
+            to="/login"
             class="text-muted-foreground hover:text-primary-600 transition"
           >
             {{ $t('general.btn.login') }}
-          </RouterLink>
+          </NuxtLink>
 
           <!-- Jobs Link -->
-          <RouterLink
-            :to="{ name: 'jobs' }"
-            class="text-muted-foreground hover:text-primary-600 transition"
-          >
+          <NuxtLink to="/jobs" class="text-muted-foreground hover:text-primary-600 transition">
             {{ $t('footer.link.jobs') }}
-          </RouterLink>
+          </NuxtLink>
 
           <!-- GitHub Link (external) -->
           <a
@@ -58,7 +52,6 @@
 
 <script setup>
 import { computed } from 'vue';
-
 import { useAuthStore } from '@/stores/auth/auth';
 
 const authStore = useAuthStore();
