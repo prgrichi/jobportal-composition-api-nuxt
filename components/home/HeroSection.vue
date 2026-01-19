@@ -6,17 +6,17 @@
       <div class="max-w-2xl">
         <!-- Subtitle/Tagline -->
         <p class="mb-3 text-sm uppercase tracking-wider text-primary-600">
-          {{ $t('hero.subtitle') }}
+          {{ heroData?.subtitle }}
         </p>
 
         <!-- Main Heading -->
         <h1 class="text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          {{ $t('hero.title') }}
+          {{ heroData?.title }}
         </h1>
 
         <!-- Description -->
         <p class="text-balance mt-5 text-base text-muted-foreground leading-relaxed">
-          {{ $t('hero.description') }}
+          {{ heroData?.description }}
         </p>
 
         <!-- CTA Buttons -->
@@ -45,7 +45,14 @@
 </template>
 
 <script setup>
+import { useCms } from '~/composables/useCms';
+const { fetchHero } = useCms();
+
 defineOptions({
   name: 'HeroSection',
+});
+
+const { data: heroData } = await useAsyncData('hero', async () => {
+  return await fetchHero();
 });
 </script>
