@@ -49,9 +49,9 @@ definePageMeta({
   requiresAuth: true,
   name: 'job-details',
   title: 'Job-Details',
+  middleware: ['auth'],
 });
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 
 import { useJobStore } from '@/stores/jobs/jobs';
 import { useAuthStore } from '@/stores/auth/auth';
@@ -65,19 +65,14 @@ import JobDetailPanels from '@/components/jobs/detail/JobDetailPanels.vue';
 import JobDetailCTA from '@/components/jobs/detail/JobDetailCTA.vue';
 import JobApplicationModal from '@/components/modal/JobApplicationModal.vue';
 
-// Props
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-});
-
 // Stores
 const jobStore = useJobStore();
 const authStore = useAuthStore();
 const favoritesStore = useFavoritesStore();
 const modalStore = useModalStore();
+
+const route = useRoute();
+const jobId = computed(() => route.params.id);
 
 // Reaktive Ableitungen
 const job = computed(() => jobStore.singleJob);
@@ -98,8 +93,6 @@ const createdAtDE = computed(() => {
 const remoteLabel = computed(() => (job.value?.remote ? 'Remote möglich' : 'Vor Ort'));
 
 // Back-Route aus Route-Meta
-const route = useRoute();
-
 const backRoute = computed(() => {
   const previousRoute = route.meta.previousRoute;
 
@@ -135,7 +128,7 @@ const handleSave = () => {
 
 // Lifecycle
 onMounted(async () => {
-  await jobStore.fetchJobByIdWithCache(props.id);
+  await jobStore.fetchJobByIdWithCache(String(jobId.value));
 });
 </script>
 

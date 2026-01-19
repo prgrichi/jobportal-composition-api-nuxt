@@ -197,10 +197,10 @@ const onSubmit = async values => {
       await authStore.createUserDocument(userCredential.user);
       toast.success(t('toast.loginSuccess'));
 
+      const route = useRoute();
       // Redirect to previous page or home
-      // const redirectPath = route.query.redirect || '/';
-      // await router.push(redirectPath);
-      await navigateTo('/');
+      const redirectPath = route.query.redirect || '/';
+      await navigateTo(redirectPath);
     }
   } catch (error) {
     // Handle Firebase Auth Errors

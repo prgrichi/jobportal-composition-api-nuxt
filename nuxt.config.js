@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   },
 
   ssr: true,
+  routeRules: {
+    '/jobs/**': { ssr: false },
+  },
 
   runtimeConfig: {
     public: {

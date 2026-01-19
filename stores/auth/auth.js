@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
-// import { auth, db } from '@/config/firebase';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -12,10 +11,6 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     isAuthenticated: state => !!state.user,
-    userName: state => {
-      if (!state.user) return 'Gast';
-      return state.user.email?.split('@')[0] || 'Gast';
-    },
   },
 
   actions: {
@@ -51,13 +46,13 @@ export const useAuthStore = defineStore('auth', {
       const nuxtApp = useNuxtApp();
       const db = nuxtApp.$firebaseDb;
 
-      const userRef = doc(db, 'users', user.uid);
-      const userSnap = await getDoc(userRef);
-
       if (!db) {
         console.error('Firestore ist nicht initialisiert (kein $firebaseDb).');
         return;
       }
+
+      const userRef = doc(db, 'users', user.uid);
+      const userSnap = await getDoc(userRef);
 
       if (!userSnap.exists()) {
         console.log(user);
