@@ -46,7 +46,6 @@
 
 <script setup>
 definePageMeta({
-  requiresAuth: true,
   name: 'job-details',
   title: 'Job-Details',
   middleware: ['auth'],
