@@ -6,7 +6,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
   const apolloClient = new ApolloClient({
     link: new HttpLink({
-      uri: config.public.cmsGraphql, // z.B. http://localhost:1337/graphql
+      uri: config.public.cmsGraphql,
     }),
     cache: new InMemoryCache(),
   });
