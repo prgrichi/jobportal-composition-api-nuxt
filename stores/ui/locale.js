@@ -1,4 +1,5 @@
 // stores/ui/locale.js
+import { useCookie } from 'nuxt/app';
 import { defineStore } from 'pinia';
 
 export const useLocaleStore = defineStore('locale', {
@@ -7,19 +8,16 @@ export const useLocaleStore = defineStore('locale', {
   }),
   actions: {
     init() {
-      if (!import.meta.client) return;
-
-      const stored = localStorage.getItem('locale');
-      if (stored) {
-        this.locale = stored;
+      const cookieLang = useCookie('locale').value;
+      if (cookieLang) {
+        this.locale = cookieLang;
       }
     },
     setLocale(newLocale) {
       this.locale = newLocale;
 
-      if (import.meta.client) {
-        localStorage.setItem('locale', newLocale);
-      }
+      const cookieLang = useCookie('locale', { maxAge: 60 * 60 * 24 * 365 });
+      cookieLang.value = newLocale;
     },
   },
 });
