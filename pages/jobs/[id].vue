@@ -91,16 +91,11 @@ const createdAtDE = computed(() => {
 
 const remoteLabel = computed(() => (job.value?.remote ? 'Remote möglich' : 'Vor Ort'));
 
-// Back-Route aus Route-Meta
 const backRoute = computed(() => {
-  const previousRoute = route.meta.previousRoute;
+  const prev = authStore.previousRoute || '/';
 
-  if (previousRoute === '/') {
-    return { name: 'home' };
-  }
-  if (previousRoute === '/jobs') {
-    return { name: 'jobs' };
-  }
+  if (prev === '/jobs') return { name: 'jobs' };
+  if (prev === '/') return { name: 'home' };
   return { name: 'home' };
 });
 

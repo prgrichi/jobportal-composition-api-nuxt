@@ -13,9 +13,9 @@
         </p>
 
         <div class="mt-6 flex justify-center gap-3">
-          <RouterLink :to="{ name: 'home' }" class="btn btn-primary">
+          <NuxtLink to="/" class="btn btn-primary">
             {{ $t('notFound.btn.home') }}
-          </RouterLink>
+          </NuxtLink>
 
           <button class="btn btn-secondary" @click="$router.back()">
             {{ $t('notFound.btn.back') }}

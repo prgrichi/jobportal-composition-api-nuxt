@@ -45,14 +45,18 @@
 </template>
 
 <script setup>
-import { useCms } from '~/composables/useCms';
-const { fetchHero } = useCms();
-
 defineOptions({
   name: 'HeroSection',
 });
+import { useCms } from '~/composables/useCms';
+import { useI18n } from 'vue-i18n';
 
-const { data: heroData } = await useAsyncData('hero', async () => {
-  return await fetchHero();
+const { locale } = useI18n();
+const { fetchHero } = useCms();
+
+const currentLocale = computed(() => locale.value || 'de');
+
+const { data: heroData } = await useAsyncData('hero', () => fetchHero(currentLocale.value), {
+  watch: [currentLocale], // bei Locale-Wechsel neu fetchen
 });
 </script>
