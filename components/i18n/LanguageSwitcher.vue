@@ -26,10 +26,8 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { useLocaleStore } from '@/stores/ui/locale';
 
-const { locale } = useI18n();
 const localeStore = useLocaleStore();
 
 // Current i18n locale
@@ -56,7 +54,6 @@ const enClasses = computed(() => {
 
 // Change language
 const changeLang = lang => {
-  locale.value = lang;
   localeStore.setLocale(lang);
 };
 </script>
