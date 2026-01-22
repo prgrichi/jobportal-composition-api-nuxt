@@ -5,13 +5,13 @@
       <!-- Section Header -->
       <div class="mb-14 text-center">
         <p class="text-sm uppercase tracking-wider text-primary-600">
-          {{ $t('techStack.label') }}
+          {{ subtitle }}
         </p>
         <h2 class="mt-2 text-3xl font-semibold text-foreground">
-          {{ $t('techStack.title') }}
+          {{ title }}
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-muted-foreground">
-          {{ $t('techStack.description') }}
+          {{ description }}
         </p>
       </div>
 
@@ -20,47 +20,18 @@
         <div class="grid lg:grid-cols-2 lg:divide-x lg:divide-border">
           <!-- Left Column -->
           <div class="divide-y divide-border">
-            <!-- Item 01:  Vue -->
-            <div class="flex items-start gap-6 p-6">
+            <div class="flex items-start gap-6 p-6" v-for="(item, i) in firstCol" :key="item.id">
               <span
                 class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-500"
               >
-                01
+                {{ formatIndexWithOffset(i, 0) }}
               </span>
               <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.vue.title') }}</h3>
+                <h3 class="text-lg font-medium">
+                  {{ item.title }}
+                </h3>
                 <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.vue.description') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 02: Pinia -->
-            <div class="flex items-start gap-6 p-6">
-              <span
-                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-600"
-              >
-                02
-              </span>
-              <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.pinia.title') }}</h3>
-                <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.pinia.description') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 03: Vue Router -->
-            <div class="flex items-start gap-6 p-6">
-              <span
-                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-600"
-              >
-                03
-              </span>
-              <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.vueRouter.title') }}</h3>
-                <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.vueRouter.description') }}
+                  {{ item.copy }}
                 </p>
               </div>
             </div>
@@ -68,47 +39,18 @@
 
           <!-- Right Column -->
           <div class="divide-y divide-border">
-            <!-- Item 04: Firebase -->
-            <div class="flex items-start gap-6 p-6">
+            <div class="flex items-start gap-6 p-6" v-for="(item, i) in secondCol" :key="item.id">
               <span
-                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-600"
+                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-500"
               >
-                04
+                {{ formatIndexWithOffset(i, firstCol.length) }}
               </span>
               <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.firebase.title') }}</h3>
+                <h3 class="text-lg font-medium">
+                  {{ item.title }}
+                </h3>
                 <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.firebase.description') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 05: Vite -->
-            <div class="flex items-start gap-6 p-6">
-              <span
-                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-600"
-              >
-                05
-              </span>
-              <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.vite.title') }}</h3>
-                <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.vite.description') }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 06: Tailwind -->
-            <div class="flex items-start gap-6 p-6">
-              <span
-                class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-mono font-medium text-primary-600"
-              >
-                06
-              </span>
-              <div>
-                <h3 class="text-lg font-medium">{{ $t('techStack.items.tailwind.title') }}</h3>
-                <p class="mt-1 text-sm text-muted-foreground">
-                  {{ $t('techStack.items.tailwind.description') }}
+                  {{ item.copy }}
                 </p>
               </div>
             </div>
@@ -120,7 +62,40 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+
 defineOptions({
   name: 'TechStackSection',
 });
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: false,
+  },
+  subtitle: {
+    type: String,
+    required: false,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  technologyItems: {
+    type: Array,
+    required: false,
+  },
+});
+
+const firstCol = computed(() => {
+  return props.technologyItems.slice(0, 3);
+});
+
+const secondCol = computed(() => {
+  return props.technologyItems.slice(3, 6);
+});
+
+const formatIndexWithOffset = (i, offset) => {
+  return String(i + offset + 1).padStart(2, '0');
+};
 </script>

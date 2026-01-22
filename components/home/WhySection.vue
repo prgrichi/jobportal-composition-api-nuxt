@@ -6,45 +6,25 @@
         <!-- Left:  Section Header -->
         <div>
           <p class="text-sm uppercase tracking-wider text-primary-600">
-            {{ $t('why.label') }}
+            {{ subtitle }}
           </p>
           <h2 class="mt-2 text-3xl font-semibold text-foreground">
-            {{ $t('why.title') }}
+            {{ title }}
           </h2>
           <p class="mt-4 max-w-prose text-muted-foreground leading-relaxed">
-            {{ $t('why.description') }}
+            {{ description }}
           </p>
         </div>
 
         <!-- Right: Features List -->
         <div class="rounded-xl border border-border bg-background divide-y divide-border">
           <!-- Feature 1: Relevant Jobs -->
-          <div class="p-6 md: p-7">
+          <div class="p-6 md: p-7" v-for="feature in whyFeature" :key="feature.id">
             <h3 class="font-medium text-foreground">
-              {{ $t('why.features.relevantJobs.title') }}
+              {{ feature.title }}
             </h3>
             <p class="mt-2 text-sm text-muted-foreground">
-              {{ $t('why.features.relevantJobs.description') }}
-            </p>
-          </div>
-
-          <!-- Feature 2: Remote & Flexible -->
-          <div class="p-6 md:p-7">
-            <h3 class="font-medium text-foreground">
-              {{ $t('why.features.remoteFlexible.title') }}
-            </h3>
-            <p class="mt-2 text-sm text-muted-foreground">
-              {{ $t('why.features.remoteFlexible.description') }}
-            </p>
-          </div>
-
-          <!-- Feature 3: No Distraction -->
-          <div class="p-6 md:p-7">
-            <h3 class="font-medium text-foreground">
-              {{ $t('why.features.noDistraction.title') }}
-            </h3>
-            <p class="mt-2 text-sm text-muted-foreground">
-              {{ $t('why.features.noDistraction.description') }}
+              {{ feature.description }}
             </p>
           </div>
         </div>
@@ -56,5 +36,24 @@
 <script setup>
 defineOptions({
   name: 'WhySection',
+});
+
+defineProps({
+  title: {
+    type: String,
+    required: false,
+  },
+  subtitle: {
+    type: String,
+    required: false,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  whyFeature: {
+    type: Array,
+    required: false,
+  },
 });
 </script>

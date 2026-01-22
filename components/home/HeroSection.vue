@@ -6,17 +6,17 @@
       <div class="max-w-2xl">
         <!-- Subtitle/Tagline -->
         <p class="mb-3 text-sm uppercase tracking-wider text-primary-600">
-          {{ heroData?.subtitle }}
+          {{ subtitle }}
         </p>
 
         <!-- Main Heading -->
         <h1 class="text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          {{ heroData?.title }}
+          {{ title }}
         </h1>
 
         <!-- Description -->
         <p class="text-balance mt-5 text-base text-muted-foreground leading-relaxed">
-          {{ heroData?.description }}
+          {{ description }}
         </p>
 
         <!-- CTA Buttons -->
@@ -48,15 +48,18 @@
 defineOptions({
   name: 'HeroSection',
 });
-import { useCms } from '~/composables/useCms';
-import { useI18n } from 'vue-i18n';
-
-const { locale } = useI18n();
-const { fetchHero } = useCms();
-
-const currentLocale = computed(() => locale.value || 'de');
-
-const { data: heroData } = await useAsyncData('hero', () => fetchHero(currentLocale.value), {
-  watch: [currentLocale], // bei Locale-Wechsel neu fetchen
+defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  subtitle: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
 });
 </script>
