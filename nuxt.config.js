@@ -6,6 +6,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'de',
+      },
       title: 'Jobportal',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
